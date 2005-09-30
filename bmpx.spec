@@ -7,7 +7,6 @@ Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+2
 Name:		bmpx
 Version:	0.11.5.1
 Release:	0.1
-Epoch:		1
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://download.berlios.de/bmpx/%{name}-%{version}.tar.gz
