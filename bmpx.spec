@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_with	gstreamer	# build with GStreamer support (instead of XINE)
-
+#
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+2
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+2
 Name:		bmpx
@@ -9,7 +9,7 @@ Version:	0.11.5.1
 Release:	0.1
 Epoch:		1
 License:	GPL
-Group:		Applications/Sound
+Group:		X11/Applications/Sound
 Source0:	http://download.berlios.de/bmpx/%{name}-%{version}.tar.gz
 # Source0-md5:	f0b89bb96fd8b14cfd805f4a726b4f16
 Source1:	mp3license
@@ -22,12 +22,13 @@ BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
 BuildRequires:	gtk+2-devel >= 2:2.8.0
 BuildRequires:	libvorbis-devel >= 1:1.0
-BuildRequires:	libglade2-devel >= 2.5.1
+BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	taglib-devel
 %if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= 0.9.1
 %else
 BuildRequires:	xine-lib-devel
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
