@@ -1,9 +1,12 @@
 #
+# Conditional build:
+%bcond_with	gstreamer	# build with GStreamer support (instead of XINE)
+
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+2
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+2
 Name:		bmpx
 Version:	0.11.5
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	GPL
 Group:		Applications/Sound
@@ -17,14 +20,13 @@ BuildRequires:	cairo-devel >= 1.0.0
 BuildRequires:	curl-devel
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
-BuildRequires:  GConf2-devel >= 2.4.0
-BuildRequires:  gnome-vfs2-devel >= 2.4.0
 BuildRequires:	gtk+2-devel >= 2:2.8.0
-BuildRequires:	home-etc-devel
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	libglade2-devel >= 2.5.1
-BuildRequires:	pkgconfig
 BuildRequires:	taglib-devel
+%if %{with gstreamer}
+BuildRequires:	gstreamer-devel >= 0.9.1
+%else
 BuildRequires:	xine-lib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -49,16 +51,13 @@ rm -rf autom4te.cache
 %{__autoheader}
 %{__automake}
 %configure \
-%ifarch %{ix86}
-%ifnarch i386 i486
-	--enable-simd \
-%endif
+%if %{with gstreamer}
+	--enable-gst \
 %else
-	--disable-simd \
+	--enable-xine \
 %endif
-	--enable-gnome-vfs \
-	--enable-gconf \
-	--enable-shared
+	--enable-shared \
+	--enable-static
 %{__make}
 
 %install
@@ -67,6 +66,12 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=%{_aclocaldir}
+
+rm -f $RPM_BUILD_ROOT%{_datadir}/bmpx/data/GPL.txt
+
+install -d $RPM_BUILD_ROOT%{_pixmapsdir}
+mv -f $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/bmpx.png \
+	$RPM_BUILD_ROOT%{_pixmapsdir}
 
 %find_lang %{name}
 
@@ -88,4 +93,4 @@ umask 022
 %{_desktopdir}/*
 %{_datadir}/bmpx
 %{_datadir}/bmp-remote
-%{_iconsdir}/*/*/*/*
+%{_pixmapsdir}/*
