@@ -18,6 +18,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	cairo-devel >= 1.0.0
 BuildRequires:	curl-devel
+BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
 BuildRequires:	gtk+2-devel >= 2:2.8.0
