@@ -21,8 +21,8 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
 BuildRequires:	gtk+2-devel >= 2:2.8.0
-BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	libglade2-devel >= 1:2.5.1
+BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	taglib-devel
 %if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= 0.9.1
@@ -39,8 +39,8 @@ experience.
 
 %description -l pl
 BMPx jest nastêpc± projektu BMP z przepisanym od zera kodem i skupia
-siê na utrzymaniu stabilnej podstawy odtwarzacza audio, aby udostêpniæ
-odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
+siê na utrzymaniu stabilnej podstawy odtwarzacza d¼wiêku, aby
+udostêpniæ odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
 
 %prep
 %setup -q
@@ -94,9 +94,9 @@ umask 022
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/bmp*
+%attr(755,root,root) %{_libdir}/libskinned.so.*
 %{_mandir}/man*/*
 %{_desktopdir}/*
 %{_datadir}/bmpx
 %{_datadir}/bmp-remote
 %{_pixmapsdir}/*
-%attr(755,root,root) %{_libdir}/libskinned.so.*
