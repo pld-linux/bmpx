@@ -56,6 +56,7 @@ rm -rf autom4te.cache
 %configure \
 %if %{with gstreamer}
 	--enable-gst \
+	--disable-xine
 %else
 	--enable-xine \
 %endif
