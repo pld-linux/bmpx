@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_with	gstreamer	# build with GStreamer support (instead of XINE)
 
-%define		_rc	RC2
+%define		_rc	RC3
 
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+2
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+2
@@ -12,7 +12,7 @@ Release:	0.%{_rc}.1
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://download.berlios.de/bmpx/%{name}-%{version}-%{_rc}.tar.gz
-# Source0-md5:	281f71d825d61bc2c96014cf7577e6f8
+# Source0-md5:	ad3eb15dc0ba2f3ad2be9724e19d35ee
 Source1:	mp3license
 URL:		http://bmpx.berlios.de/
 BuildRequires:	autoconf
