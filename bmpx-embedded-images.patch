@@ -1,0 +1,11 @@
+--- bmpx-0.12_RC11/src/embedded-images/Makefile.am~	2005-10-09 18:33:38.000000000 +0000
++++ bmpx-0.12_RC11/src/embedded-images/Makefile.am	2005-10-16 06:49:43.555823344 +0000
+@@ -9,7 +9,7 @@
+ 	@echo "* Generating media icons"
+ 	@gdk-pixbuf-csource --build-list \
+ 		`for x in $(basename $(notdir $(dist_noinst_DATA))); do \
+-			echo "$${x/-/_}"; \
++			echo "\`echo $${x}|tr '-' '_'\`"; \
+ 			echo "    $(srcdir)/$${x}.png";\
+ 		done` > media-pixbufs.h
+ 
