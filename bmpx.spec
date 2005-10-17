@@ -33,6 +33,7 @@ BuildRequires:	gstreamer-devel >= 0.9.1
 %else
 BuildRequires:	xine-lib-devel
 %endif
+Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
