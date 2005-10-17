@@ -65,7 +65,7 @@ multimedialnego BMPx.
 Summary:	Container plugin for BMPx
 Summary(pl):	Wtyczka Container dla BMPx
 Group:		X11/Applications/Sound
-#Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-container
 Plugin providing support for folders, m3u & pls playlist files, etc.
@@ -80,26 +80,25 @@ Group:          X11/Applications/Sound
 Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-flow
--
+Flow plugin for BMPx.
 
 %description plugin-flow -l pl
--
+Wtyczka Flow dla BMPx.
 
 %package plugin-transport
 Summary:	Transport plugin for BMPx
 Summary(pl):	Wtyczka Transport dla BMPx
 Group:		X11/Applications/Sound
-#Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-transport
--
+Transport plugin for BMPx.
 
 %description plugin-transport -l pl
--
+Wtyczka Transport dla BMPx.
 
 %prep
 %setup -q -n %{name}-%{version}_%{_rc}
-
 %patch0 -p1
 
 %build
