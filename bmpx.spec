@@ -131,6 +131,8 @@ install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 mv -f $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/bmpx.png \
 	$RPM_BUILD_ROOT%{_pixmapsdir}
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/*/*.la
+
 %find_lang %{name}
 
 %clean
@@ -152,7 +154,7 @@ umask 022
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/bmp*
-%attr(755,root,root) %{_libdir}/libskinned.so.*
+%attr(755,root,root) %{_libdir}/libskinned.so.*.*.*
 %dir %{_libdir}/bmpx
 %dir %{_libdir}/bmpx/plugins
 %{_mandir}/man*/*
@@ -163,24 +165,19 @@ umask 022
 
 %files devel
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/libbeep.so
-%{_libdir}/lib*.la
-%{_includedir}/*
+%{_includedir}/bmpx
 
 %files plugin-container
 %defattr(644,root,root,755)
 %dir %{_libdir}/bmpx/plugins/container
-%attr(755,root,root) %{_libdir}/bmpx/plugins/container/*.so.*
-%{_libdir}/bmpx/plugins/container/*.la
+%attr(755,root,root) %{_libdir}/bmpx/plugins/container/*.so*
 
 %files plugin-flow
 %defattr(644,root,root,755)
 %dir %{_libdir}/bmpx/plugins/flow
-%attr(755,root,root) %{_libdir}/bmpx/plugins/flow/*.so.*
-%{_libdir}/bmpx/plugins/flow/*.la
+%attr(755,root,root) %{_libdir}/bmpx/plugins/flow/*.so*
 
 %files plugin-transport
 %defattr(644,root,root,755)
 %dir %{_libdir}/bmpx/plugins/transport
-%attr(755,root,root) %{_libdir}/bmpx/plugins/transport/*.so.*
-%{_libdir}/bmpx/plugins/transport/*.la
+%attr(755,root,root) %{_libdir}/bmpx/plugins/transport/*.so*
