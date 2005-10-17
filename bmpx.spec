@@ -24,9 +24,9 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
 BuildRequires:	gtk+2-devel >= 2:2.8.0
-BuildRequires:	gss-devel
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libvorbis-devel >= 1:1.0
+BuildRequires:	rpm-pythonprov
 BuildRequires:	taglib-devel
 %if %{with gstreamer}
 BuildRequires:	gstreamer-devel >= 0.9.1
