@@ -32,6 +32,7 @@ BuildRequires:	gstreamer-devel >= 0.9.1
 %else
 BuildRequires:	xine-lib-devel
 %endif
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
@@ -55,11 +56,22 @@ BMPx jest nastêpc± projektu BMP z przepisanym od zera kodem i skupia
 siê na utrzymaniu stabilnej podstawy odtwarzacza d¼wiêku, aby
 udostêpniæ odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
 
+%package libs
+Summary:	BMPx player library
+Summary(pl):	Biblioteka odtwarzacza BMPx
+Group:		X11/Development/Libraries
+
+%description libs
+BMPx player library.
+
+%description libs -l pl
+Biblioteka odtwarzacza BMPx.
+
 %package devel
 Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
-# doesn't require base
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description devel
 Header files required for compiling BMPx media player plugins.
@@ -159,7 +171,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/*/*.{a,la}
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 
@@ -181,17 +192,18 @@ EOF
 %endif
 
 %postun
-/sbin/ldconfig
 if [ $1 = 0 ]; then
     umask 022
     [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
 fi
 
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/bmp*
-%attr(755,root,root) %{_libdir}/libskinned.so.*.*.*
 %dir %{_libdir}/bmpx
 %dir %{_libdir}/bmpx/plugins
 %{_mandir}/man*/*
@@ -199,6 +211,10 @@ fi
 %{_datadir}/bmpx
 %{_datadir}/bmp-remote
 %{_pixmapsdir}/*
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libskinned.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
