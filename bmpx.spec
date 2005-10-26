@@ -68,6 +68,18 @@ Header files required for compiling BMPx media player plugins.
 Pliki nag³ówkowe potrzebne do kompilowania wtyczek odtwarzacza
 multimedialnego BMPx.
 
+%package static
+Summary:	Static BMPx library
+Summary(pl):	Statyczna biblioteka BMPx
+Group:		X11/Development/Libraries
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+
+%description static
+Static BMPx library.
+
+%description static -l pl
+Statyczna biblioteka BMPx.
+
 %package plugin-container
 Summary:	Container plugin for BMPx
 Summary(pl):	Wtyczka Container dla BMPx
@@ -123,7 +135,7 @@ rm -rf autom4te.cache
 	--enable-xine \
 %endif
 	--enable-shared \
-	--disable-static
+	--enable-static
 %{__make}
 
 %install
@@ -139,7 +151,7 @@ install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 mv -f $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/bmpx.png \
 	$RPM_BUILD_ROOT%{_pixmapsdir}
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/*/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/*/*.{a,la}
 
 %find_lang %{name}
 
@@ -194,6 +206,9 @@ fi
 %{_libdir}/libskinned.la
 %{_includedir}/bmpx
 
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/*.a
 
 %files plugin-container
 %defattr(644,root,root,755)
