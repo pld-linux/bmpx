@@ -1,9 +1,9 @@
 #
 # Conditional build:
 %bcond_with	gstreamer	# build with GStreamer support (instead of XINE)
-
-Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+2
-Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+2
+#
+Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
+Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.12.1
 Release:	1
@@ -13,6 +13,7 @@ Source0:	http://download.berlios.de/bmpx/%{name}-%{version}.tar.gz
 # Source0-md5:	40965fe0e9707a49a773c91eff777fb2
 Source1:	mp3license
 Patch0:		%{name}-embedded-images.patch
+Patch1:		%{name}-desktop.patch
 URL:		http://bmpx.berlios.de/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -34,6 +35,13 @@ BuildRequires:	xine-lib-devel
 Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
+%if %{with gstreamer}
+Requires:	gstreamer-audio-effects
+Requires:	gstreamer-audio-formats
+Requires:	gstreamer-audiosink
+%else
+Requires:	xine-plugin-audio
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -99,6 +107,7 @@ Wtyczka Transport dla BMPx.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm -rf autom4te.cache
@@ -138,16 +147,33 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/*/*.la
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/sbin/ldconfig
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 
-/sbin/ldconfig
+%if %{with gstreamer}
+%banner %{name} -e << EOF
+Remember to install appropriate GStreamer plugins for files
+you want to play:
+- gstreamer-flac (for FLAC)
+- gstreamer-mad (for MP3s)
+- gstreamer-vorbis (for Ogg Vorbis)
+EOF
+%else
+%banner %{name} -e << EOF
+Remember to install appropriate xine-decode plugins for files
+you want to play:
+- xine-decode-flac (for FLAC)
+- xine-decode-ogg (for Ogg Vorbis)
+EOF
+%endif
 
 %postun
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
-
 /sbin/ldconfig
+if [ $1 = 0 ]; then
+    umask 022
+    [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
+fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
