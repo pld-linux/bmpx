@@ -129,29 +129,29 @@ Transport plugin for BMPx.
 Wtyczka Transport dla BMPx.
 
 %package remote-curses
-Summary:	BMPx Python status Watcher
-Summary(pl):	Obserwator statusu BMPx w Pythonie
+Summary:	BMPx python status watcher
+Summary(pl):	Obserwator statusu BMPx w pythonie
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description remote-curses
-BMPx Python status Watcher (CLI interface).
+BMPx python status watcher (CLI interface).
 
 %description remote-curses -l pl
-Obserwator statusu BMPx w Pythonie (interfejs CLI).
+Obserwator statusu BMPx w pythonie (interfejs CLI).
 
 %package remote-gtk
-Summary:	BMPx Python status Watcher
-Summary(pl):	Obserwator statusu BMPx w Pythonie
+Summary:	BMPx python status watcher
+Summary(pl):	Obserwator statusu BMPx w pythonie
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-pygtk-glade
 
 %description remote-gtk
-BMPx Python status Watcher (GTK+ interface).
+BMPx python status watcher (GTK+ interface).
 
 %description remote-gtk -l pl
-Obserwator statusu BMPx w Pythonie (interfejs GTK+).
+Obserwator statusu BMPx w pythonie (interfejs GTK+).
 
 %prep
 %setup -q
@@ -233,8 +233,8 @@ fi
 %dir %{_libdir}/bmpx
 %dir %{_libdir}/bmpx/plugins
 %{_mandir}/man*/*
-%{_desktopdir}/*
 %{_datadir}/bmpx
+%{_desktopdir}/*
 %{_pixmapsdir}/*
 
 %files libs
