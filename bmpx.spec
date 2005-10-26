@@ -51,7 +51,7 @@ udostêpniæ odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
 Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
-#Requires:	%{name} = %{epoch}:%{version}-%{release}
+# doesn't require base
 
 %description devel
 Header files required for compiling BMPx media player plugins.
@@ -97,7 +97,7 @@ Transport plugin for BMPx.
 Wtyczka Transport dla BMPx.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -p1
 
 %build
