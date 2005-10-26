@@ -34,8 +34,8 @@ BuildRequires:	gstreamer-devel >= 0.9.1
 BuildRequires:	xine-lib-devel
 %endif
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
+Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects
@@ -106,9 +106,9 @@ Plugin providing support for folders, m3u & pls playlist files, etc.
 Wtyczka dodaj±ca obs³ugê folderów, playlist w formacie m3u i pls, itp.
 
 %package plugin-flow
-Summary:        Flow plugin for BMPx
-Summary(pl):    Wtyczka Flow dla BMPx
-Group:          X11/Applications/Sound
+Summary:	Flow plugin for BMPx
+Summary(pl):	Wtyczka Flow dla BMPx
+Group:		X11/Applications/Sound
 Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 %description plugin-flow
