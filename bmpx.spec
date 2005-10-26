@@ -25,6 +25,7 @@ BuildRequires:	gtk+2-devel >= 2:2.8.0
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.194
 BuildRequires:	taglib-devel
 %if %{with gstreamer}
 # there is no gstreamer 0.9.x in PLD cvs yet!
