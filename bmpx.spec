@@ -17,7 +17,6 @@ Patch1:		%{name}-desktop.patch
 URL:		http://bmpx.berlios.de/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	cairo-devel >= 1.0.0
 BuildRequires:	curl-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
@@ -28,6 +27,7 @@ BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	taglib-devel
 %if %{with gstreamer}
+# there is no gstreamer 0.9.x in PLD cvs yet!
 BuildRequires:	gstreamer-devel >= 0.9.1
 %else
 BuildRequires:	xine-lib-devel
@@ -190,7 +190,10 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libskinned.so
+%{_libdir}/libskinned.la
 %{_includedir}/bmpx
+
 
 %files plugin-container
 %defattr(644,root,root,755)
