@@ -128,6 +128,31 @@ Transport plugin for BMPx.
 %description plugin-transport -l pl
 Wtyczka Transport dla BMPx.
 
+%package remote-curses
+Summary:	BMPx Python status Watcher
+Summary(pl):	Obserwator statusu BMPx w Pythonie
+Group:		X11/Applications/Sound
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description remote-curses
+BMPx Python status Watcher (CLI interface).
+
+%description remote-curses -l pl
+Obserwator statusu BMPx w Pythonie (interfejs CLI).
+
+%package remote-gtk
+Summary:	BMPx Python status Watcher
+Summary(pl):	Obserwator statusu BMPx w Pythonie
+Group:		X11/Applications/Sound
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	python-pygtk-glade
+
+%description remote-gtk
+BMPx Python status Watcher (GTK+ interface).
+
+%description remote-gtk -l pl
+Obserwator statusu BMPx w Pythonie (interfejs GTK+).
+
 %prep
 %setup -q
 %patch0 -p1
@@ -203,13 +228,13 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/bmp*
+%attr(755,root,root) %{_bindir}/bmpx
+%attr(755,root,root) %{_bindir}/bmp-dbus-*
 %dir %{_libdir}/bmpx
 %dir %{_libdir}/bmpx/plugins
 %{_mandir}/man*/*
 %{_desktopdir}/*
 %{_datadir}/bmpx
-%{_datadir}/bmp-remote
 %{_pixmapsdir}/*
 
 %files libs
@@ -240,3 +265,12 @@ fi
 %defattr(644,root,root,755)
 %dir %{_libdir}/bmpx/plugins/transport
 %attr(755,root,root) %{_libdir}/bmpx/plugins/transport/*.so*
+
+%files remote-curses
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/bmpty
+
+%files remote-gtk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/bmp-remote-pygtk
+%{_datadir}/bmp-remote
