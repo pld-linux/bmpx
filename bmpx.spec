@@ -146,6 +146,7 @@ Summary:	BMPx python status watcher
 Summary(pl):	Obserwator statusu BMPx w pythonie
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	python-dbus
 Requires:	python-pygtk-glade
 
 %description remote-gtk
