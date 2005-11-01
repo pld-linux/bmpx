@@ -37,7 +37,7 @@ Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
-Requires:	libhrel = %{epoch}:%{version}-%{release}
+Requires:	libhrel = 0.1-%{release}
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects
 Requires:	gstreamer-audio-formats
@@ -160,6 +160,7 @@ Obserwator statusu BMPx w pythonie (interfejs GTK+).
 Summary:	Holyrel library
 Summary(pl):	Biblioteka Holyrel
 Group:		X11/Development/Libraries
+Version:	0.1
 
 %description -n libhrel
 Holyrel library.
