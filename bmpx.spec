@@ -5,12 +5,12 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.12.1
+Version:	0.12.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
-Source0:	http://download.berlios.de/bmpx/%{name}-%{version}.tar.gz
-# Source0-md5:	40965fe0e9707a49a773c91eff777fb2
+Source0:	http://download.berlios.de/bmpx/%{name}-%{version}.tar.bz2
+# Source0-md5:	840bca5822c90b2812b0fdcf77cae10e
 Source1:	mp3license
 Patch0:		%{name}-embedded-images.patch
 Patch1:		%{name}-desktop.patch
@@ -37,6 +37,7 @@ Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
+Requires:	libhrel = %{epoch}:%{version}-%{release}
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects
 Requires:	gstreamer-audio-formats
@@ -154,6 +155,29 @@ BMPx python status watcher (GTK+ interface).
 
 %description remote-gtk -l pl
 Obserwator statusu BMPx w pythonie (interfejs GTK+).
+
+%package -n libhrel
+Summary:	Holyrel library
+Summary(pl):	Biblioteka Holyrel
+Group:		X11/Development/Libraries
+
+%description -n libhrel
+Holyrel library.
+
+%description -n libhrel -l pl
+Biblioteka Holyrel.
+
+%package -n libhrel-devel
+Summary:        Header files for Holyrek library
+Summary(pl):    Pliki nag³ówkowe biblioteki Holyrel
+Group:          X11/Development/Libraries
+Requires:       libhrel = %{epoch}:%{version}-%{release}
+
+%description -n libhrel-devel
+Header files fotr Holyrel library.
+
+%description -n libhrel-devel -l pl
+Pliki nag³ówkowe biblioteki Holyrel.
 
 %prep
 %setup -q
@@ -276,3 +300,14 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/bmp-remote-pygtk
 %{_datadir}/bmp-remote
+
+%files -n libhrel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libhrel.so.*.*.*
+
+%files -n libhrel-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libhrel.so
+%{_libdir}/libhrel.la
+%{_pkgconfigdir}/hrel.pc
+%{_includedir}/libhrel
