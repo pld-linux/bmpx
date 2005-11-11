@@ -5,14 +5,13 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.12.2
+Version:	0.12.4
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
-Source0:	http://download.berlios.de/bmpx/%{name}-%{version}.tar.bz2
-# Source0-md5:	840bca5822c90b2812b0fdcf77cae10e
+Source0:	http://bmpx.kicks-ass.net/downloads/0.12/%{name}-%{version}.tar.bz2
+# Source0-md5:	6fbe6047ed4f658c602cae2b17222438
 Source1:	mp3license
-Patch0:		%{name}-embedded-images.patch
 Patch1:		%{name}-desktop.patch
 URL:		http://bmpx.berlios.de/
 BuildRequires:	autoconf
@@ -74,6 +73,8 @@ Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	libchroma-devel
+Requires:	libhrel-devel
 
 %description devel
 Header files required for compiling BMPx media player plugins.
@@ -156,6 +157,31 @@ BMPx python status watcher (GTK+ interface).
 %description remote-gtk -l pl
 Obserwator statusu BMPx w pythonie (interfejs GTK+).
 
+%package -n libchroma
+Summary:	Chroma library
+Summary(pl):	Biblioteka Chroma
+Group:		X11/Development/Libraries
+Version:	0.1
+
+%description -n libchroma
+Chroma library.
+
+%description -n libchroma -l pl
+Biblioteka Chroma.
+
+%package -n libchroma-devel
+Summary:        Header files for Chroma library
+Summary(pl):    Pliki nag³ówkowe biblioteki Chroma
+Group:          X11/Development/Libraries
+Requires:       libchroma = %{epoch}:%{version}-%{release}
+Version:	0.1
+
+%description -n libchroma-devel
+Header files for Chroma library.
+
+%description -n libchroma-devel -l pl
+Pliki nag³ówkowe biblioteki Chroma.
+
 %package -n libhrel
 Summary:	Holyrel library
 Summary(pl):	Biblioteka Holyrel
@@ -169,20 +195,20 @@ Holyrel library.
 Biblioteka Holyrel.
 
 %package -n libhrel-devel
-Summary:        Header files for Holyrek library
+Summary:        Header files for Holyrel library
 Summary(pl):    Pliki nag³ówkowe biblioteki Holyrel
 Group:          X11/Development/Libraries
 Requires:       libhrel = %{epoch}:%{version}-%{release}
+Version:	0.1
 
 %description -n libhrel-devel
-Header files fotr Holyrel library.
+Header files for Holyrel library.
 
 %description -n libhrel-devel -l pl
 Pliki nag³ówkowe biblioteki Holyrel.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 
 %build
@@ -216,6 +242,7 @@ mv -f $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/bmpx.png \
 	$RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/*/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{_bindir}/{ctt,hash_*,hrel-demo}
 
 %find_lang %{name}
 
@@ -251,6 +278,12 @@ fi
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
+
+%post	-n libchroma -p /sbin/ldconfig
+%postun	-n libchroma -p /sbin/ldconfig
+
+%post	-n libhrel -p /sbin/ldconfig
+%postun	-n libhrel -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -301,6 +334,16 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/bmp-remote-pygtk
 %{_datadir}/bmp-remote
+
+%files -n libchroma
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libchroma.so.*.*.*
+
+%files -n libchroma-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libchroma.so
+%{_libdir}/libchroma.la
+%{_includedir}/libchroma
 
 %files -n libhrel
 %defattr(644,root,root,755)
