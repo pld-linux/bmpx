@@ -182,10 +182,10 @@ Chroma library.
 Biblioteka Chroma.
 
 %package -n libchroma-devel
-Summary:        Header files for Chroma library
-Summary(pl):    Pliki nag³ówkowe biblioteki Chroma
-Group:          X11/Development/Libraries
-Requires:       libchroma = %{epoch}:%{version}-%{release}
+Summary:	Header files for Chroma library
+Summary(pl):	Pliki nag³ówkowe biblioteki Chroma
+Group:		X11/Development/Libraries
+Requires:	libchroma = %{epoch}:%{version}-%{release}
 Version:	0.1
 
 %description -n libchroma-devel
@@ -208,10 +208,10 @@ Holyrel library.
 Biblioteka Holyrel.
 
 %package -n libhrel-devel
-Summary:        Header files for Holyrel library
-Summary(pl):    Pliki nag³ówkowe biblioteki Holyrel
-Group:          X11/Development/Libraries
-Requires:       libhrel = %{epoch}:%{version}-%{release}
+Summary:	Header files for Holyrel library
+Summary(pl):	Pliki nag³ówkowe biblioteki Holyrel
+Group:		X11/Development/Libraries
+Requires:	libhrel = %{epoch}:%{version}-%{release}
 Version:	0.1
 Release:	2
 
