@@ -5,15 +5,15 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.12.4
+Version:	0.12.5
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
-Source0:	http://bmpx.kicks-ass.net/downloads/0.12/%{name}-%{version}.tar.bz2
-# Source0-md5:	6fbe6047ed4f658c602cae2b17222438
+Source0:	http://dl.sourceforge.net/beepmp/%{name}-%{version}.tar.bz2
+# Source0-md5:	fc9d1fabd48c5a2d70553603b74363aa
 Source1:	mp3license
 Patch1:		%{name}-desktop.patch
-URL:		http://bmpx.berlios.de/
+URL:		http://beep-media-player.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	curl-devel
@@ -36,7 +36,7 @@ Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
-Requires:	libhrel = 0.1-%{release}
+Requires:	libhrel = 0.1-2
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects
 Requires:	gstreamer-audio-formats
@@ -131,6 +131,18 @@ Transport plugin for BMPx.
 %description plugin-transport -l pl
 Wtyczka Transport dla BMPx.
 
+%package remote
+Summary:	BMPx python status watcher
+Summary(pl):	Obserwator statusu BMPx
+Group:		X11/Applications/Sound
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description remote
+BMPx python status watcher.
+
+%description remote -l pl
+Obserwator statusu BMPx.
+
 %package remote-curses
 Summary:	BMPx python status watcher
 Summary(pl):	Obserwator statusu BMPx w pythonie
@@ -187,6 +199,7 @@ Summary:	Holyrel library
 Summary(pl):	Biblioteka Holyrel
 Group:		X11/Development/Libraries
 Version:	0.1
+Release:	2
 
 %description -n libhrel
 Holyrel library.
@@ -200,6 +213,7 @@ Summary(pl):    Pliki nag³ówkowe biblioteki Holyrel
 Group:          X11/Development/Libraries
 Requires:       libhrel = %{epoch}:%{version}-%{release}
 Version:	0.1
+Release:	2
 
 %description -n libhrel-devel
 Header files for Holyrel library.
@@ -325,6 +339,10 @@ fi
 %defattr(644,root,root,755)
 %dir %{_libdir}/bmpx/plugins/transport
 %attr(755,root,root) %{_libdir}/bmpx/plugins/transport/*.so*
+
+%files remote
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/bmpx-remote
 
 %files remote-curses
 %defattr(644,root,root,755)
