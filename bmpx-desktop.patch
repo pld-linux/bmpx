@@ -1,13 +1,13 @@
 diff -aurN bmpx-0.12.1.orig/bmpx.desktop.in bmpx-0.12.1/bmpx.desktop.in
 --- bmpx-0.12.1.orig/bmpx.desktop.in	2005-10-15 04:52:34.000000000 +0200
-+++ bmpx-0.12.1/bmpx.desktop.in	2005-10-26 18:01:17.000000000 +0200
++++ bmpx-0.12.1/desktop/bmpx.desktop.in	2005-10-26 18:01:17.000000000 +0200
 @@ -2,9 +2,9 @@
  Name=BMPx
  Comment=Play music
  Exec=bmpx
 -Icon=bmpx.png
 +Icon=bmpx
- MimeType=audio/x-scpls;audio/x-mpegurl;audio/mpegurl;audio/mp3;audio/x-mp3;audio/mpeg;audio/x-mpeg;audio/x-wav;application/x-ogg;
+ #MimeType=audio/x-scpls;audio/x-mpegurl;audio/mpegurl;audio/mp3;audio/x-mp3;audio/mpeg;audio/x-mpeg;audio/x-wav;application/x-ogg;
 -Categories=Application;GTK;AudioVideo;Player;
 +Categories=GTK;Audio;Player;
  Terminal=false
