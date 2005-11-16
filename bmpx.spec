@@ -5,12 +5,12 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.12.5
+Version:	0.12.7
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/beepmp/%{name}-%{version}.tar.bz2
-# Source0-md5:	fc9d1fabd48c5a2d70553603b74363aa
+# Source0-md5:	b7abf830a548e017951ce6389d76fc9e
 Source1:	mp3license
 Patch1:		%{name}-desktop.patch
 URL:		http://beep-media-player.org/
@@ -303,9 +303,10 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/bmpx
-%attr(755,root,root) %{_bindir}/bmp-dbus-*
+%attr(755,root,root) %{_bindir}/bmpx-dbus-*
 %dir %{_libdir}/bmpx
 %dir %{_libdir}/bmpx/plugins
+%dir %{_datadir}/bmpx-clients
 %{_mandir}/man*/*
 %{_datadir}/bmpx
 %{_desktopdir}/*
@@ -350,8 +351,8 @@ fi
 
 %files remote-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/bmp-remote-pygtk
-%{_datadir}/bmp-remote
+%attr(755,root,root) %{_bindir}/bmpx-client-pygtk
+%{_datadir}/bmpx-clients/pygtk
 
 %files -n libchroma
 %defattr(644,root,root,755)
