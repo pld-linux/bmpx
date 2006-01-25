@@ -5,12 +5,12 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.12.8
+Version:	0.12.9
 Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/beepmp/%{name}-%{version}.tar.bz2
-# Source0-md5:	a894bb36467ab190aa68c0f972ef82f6
+# Source0-md5:	4449eb429dc7bfb9c2ec3feb9e8c7e56
 Source1:	mp3license
 Patch1:		%{name}-desktop.patch
 URL:		http://beep-media-player.org/
@@ -25,10 +25,10 @@ BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.194
+BuildRequires:	startup-notification-devel
 BuildRequires:	taglib-devel
 %if %{with gstreamer}
-# there is no gstreamer 0.9.x in PLD cvs yet!
-BuildRequires:	gstreamer-devel >= 0.9.1
+BuildRequires:	gstreamer-devel >= 0.10
 %else
 BuildRequires:	xine-lib-devel
 %endif
@@ -73,7 +73,6 @@ Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	libchroma-devel
 Requires:	libhrel-devel
 
 %description devel
@@ -168,31 +167,6 @@ BMPx python status watcher (GTK+ interface).
 
 %description remote-gtk -l pl
 Obserwator statusu BMPx w pythonie (interfejs GTK+).
-
-%package -n libchroma
-Summary:	Chroma library
-Summary(pl):	Biblioteka Chroma
-Group:		X11/Development/Libraries
-Version:	0.1
-
-%description -n libchroma
-Chroma library.
-
-%description -n libchroma -l pl
-Biblioteka Chroma.
-
-%package -n libchroma-devel
-Summary:	Header files for Chroma library
-Summary(pl):	Pliki nag³ówkowe biblioteki Chroma
-Group:		X11/Development/Libraries
-Requires:	libchroma = %{epoch}:%{version}-%{release}
-Version:	0.1
-
-%description -n libchroma-devel
-Header files for Chroma library.
-
-%description -n libchroma-devel -l pl
-Pliki nag³ówkowe biblioteki Chroma.
 
 %package -n libhrel
 Summary:	Holyrel library
@@ -293,9 +267,6 @@ fi
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
-%post	-n libchroma -p /sbin/ldconfig
-%postun	-n libchroma -p /sbin/ldconfig
-
 %post	-n libhrel -p /sbin/ldconfig
 %postun	-n libhrel -p /sbin/ldconfig
 
@@ -321,6 +292,7 @@ fi
 %attr(755,root,root) %{_libdir}/libskinned.so
 %{_libdir}/libskinned.la
 %{_includedir}/bmpx
+%{_includedir}/libskinned
 
 %files static
 %defattr(644,root,root,755)
@@ -354,15 +326,15 @@ fi
 %attr(755,root,root) %{_bindir}/bmpx-client-pygtk
 %{_datadir}/bmpx-clients/pygtk
 
-%files -n libchroma
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libchroma.so.*.*.*
-
-%files -n libchroma-devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libchroma.so
-%{_libdir}/libchroma.la
-%{_includedir}/libchroma
+#jph %files -n libchroma
+#jph %defattr(644,root,root,755)
+#jph %attr(755,root,root) %{_libdir}/libchroma.so.*.*.*
+#jph 
+#jph %files -n libchroma-devel
+#jph %defattr(644,root,root,755)
+#jph %attr(755,root,root) %{_libdir}/libchroma.so
+#jph %{_libdir}/libchroma.la
+#jph %{_includedir}/libchroma
 
 %files -n libhrel
 %defattr(644,root,root,755)
