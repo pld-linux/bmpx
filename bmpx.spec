@@ -32,6 +32,8 @@ BuildRequires:	gstreamer-devel >= 0.10
 %else
 BuildRequires:	xine-lib-devel
 %endif
+Obsoletes:	libchroma
+Obsoletes:	libchroma-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
 Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
@@ -325,16 +327,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/bmpx-client-pygtk
 %{_datadir}/bmpx-clients/pygtk
-
-#jph %files -n libchroma
-#jph %defattr(644,root,root,755)
-#jph %attr(755,root,root) %{_libdir}/libchroma.so.*.*.*
-#jph 
-#jph %files -n libchroma-devel
-#jph %defattr(644,root,root,755)
-#jph %attr(755,root,root) %{_libdir}/libchroma.so
-#jph %{_libdir}/libchroma.la
-#jph %{_includedir}/libchroma
 
 %files -n libhrel
 %defattr(644,root,root,755)
