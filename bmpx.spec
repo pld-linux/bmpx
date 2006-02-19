@@ -36,10 +36,10 @@ BuildRequires:	xine-lib-devel
 %endif
 Obsoletes:	libchroma
 Obsoletes:	libchroma-devel
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	%{name}-plugin-container = %{epoch}:%{version}-%{release}
-Requires:	%{name}-plugin-flow = %{epoch}:%{version}-%{release}
-Requires:	%{name}-plugin-transport = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	%{name}-plugin-container = %{version}-%{release}
+Requires:	%{name}-plugin-flow = %{version}-%{release}
+Requires:	%{name}-plugin-transport = %{version}-%{release}
 Requires:	libhrel = 0.1-2
 %if %{with gstreamer}
 Requires:	gstreamer-audio-effects
@@ -64,7 +64,7 @@ udostêpniæ odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
 %package libs
 Summary:	BMPx player library
 Summary(pl):	Biblioteka odtwarzacza BMPx
-Group:		X11/Development/Libraries
+Group:		X11/Libraries
 
 %description libs
 BMPx player library.
@@ -76,8 +76,8 @@ Biblioteka odtwarzacza BMPx.
 Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	libhrel-devel
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	libhrel-devel = 0.1-2
 
 %description devel
 Header files required for compiling BMPx media player plugins.
@@ -90,7 +90,7 @@ multimedialnego BMPx.
 Summary:	Static BMPx library
 Summary(pl):	Statyczna biblioteka BMPx
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static BMPx library.
@@ -102,7 +102,7 @@ Statyczna biblioteka BMPx.
 Summary:	Container plugin for BMPx
 Summary(pl):	Wtyczka Container dla BMPx
 Group:		X11/Applications/Sound
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description plugin-container
 Plugin providing support for folders, m3u & pls playlist files, etc.
@@ -114,7 +114,7 @@ Wtyczka dodaj±ca obs³ugê folderów, playlist w formacie m3u i pls, itp.
 Summary:	Flow plugin for BMPx
 Summary(pl):	Wtyczka Flow dla BMPx
 Group:		X11/Applications/Sound
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description plugin-flow
 Flow plugin for BMPx.
@@ -126,7 +126,7 @@ Wtyczka Flow dla BMPx.
 Summary:	Transport plugin for BMPx
 Summary(pl):	Wtyczka Transport dla BMPx
 Group:		X11/Applications/Sound
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description plugin-transport
 Transport plugin for BMPx.
@@ -138,7 +138,7 @@ Wtyczka Transport dla BMPx.
 Summary:	BMPx python status watcher
 Summary(pl):	Obserwator statusu BMPx
 Group:		X11/Applications/Sound
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description remote
 BMPx python status watcher.
@@ -150,7 +150,7 @@ Obserwator statusu BMPx.
 Summary:	BMPx python status watcher
 Summary(pl):	Obserwator statusu BMPx w pythonie
 Group:		X11/Applications/Sound
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description remote-curses
 BMPx python status watcher (CLI interface).
@@ -162,7 +162,7 @@ Obserwator statusu BMPx w pythonie (interfejs CLI).
 Summary:	BMPx python status watcher
 Summary(pl):	Obserwator statusu BMPx w pythonie
 Group:		X11/Applications/Sound
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Requires:	python-dbus
 Requires:	python-pygtk-glade
 
@@ -175,9 +175,9 @@ Obserwator statusu BMPx w pythonie (interfejs GTK+).
 %package -n libhrel
 Summary:	Holyrel library
 Summary(pl):	Biblioteka Holyrel
-Group:		X11/Development/Libraries
 Version:	0.1
 Release:	2
+Group:		X11/Libraries
 
 %description -n libhrel
 Holyrel library.
@@ -188,16 +188,24 @@ Biblioteka Holyrel.
 %package -n libhrel-devel
 Summary:	Header files for Holyrel library
 Summary(pl):	Pliki nag³ówkowe biblioteki Holyrel
-Group:		X11/Development/Libraries
-Requires:	libhrel = %{epoch}:%{version}-%{release}
 Version:	0.1
 Release:	2
+Group:		X11/Development/Libraries
+Requires:	libhrel = 0.1-2
 
 %description -n libhrel-devel
 Header files for Holyrel library.
 
 %description -n libhrel-devel -l pl
 Pliki nag³ówkowe biblioteki Holyrel.
+
+%package -n libhrel-static
+Summary:	Static Holyrel library
+Summary(pl):	Statyczna biblioteka Holyrel
+Version:	0.1
+Release:	2
+Group:		X11/Development/Libraries
+Requires:	libhrel-devel = 0.1-2
 
 %prep
 %setup -q
@@ -297,7 +305,6 @@ fi
 %attr(755,root,root) %{_libdir}/libskinned.so
 %{_libdir}/libskinned.la
 %{_libdir}/libgoa.a
-%{_libdir}/libhrel.a
 %{_includedir}/bmpx
 %{_includedir}/libskinned
 
@@ -343,3 +350,7 @@ fi
 %{_libdir}/libhrel.la
 %{_pkgconfigdir}/hrel.pc
 %{_includedir}/libhrel
+
+%files -n libhrel-static
+%defattr(644,root,root,755)
+%{_libdir}/libhrel.a
