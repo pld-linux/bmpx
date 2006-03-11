@@ -207,6 +207,12 @@ Release:	2
 Group:		X11/Development/Libraries
 Requires:	libhrel-devel = 0.1-2
 
+%description -n libhrel-static
+Static Holyrel library.
+
+%description -n libhrel-static -l pl
+Statyczna biblioteka Holyrel.
+
 %prep
 %setup -q
 %patch0 -p1
