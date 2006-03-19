@@ -1,19 +1,14 @@
-#
-# Conditional build:
-%bcond_with	gstreamer	# build with GStreamer support (instead of XINE)
-#
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.12.9
+Version:	0.14
 Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/beepmp/%{name}-%{version}.tar.bz2
-# Source0-md5:	4449eb429dc7bfb9c2ec3feb9e8c7e56
+# Source0-md5:	d049ec4c59ec5a0596eab32b1a70b2a9
 Source1:	mp3license
-Patch0:		%{name}-pic.patch
-Patch1:		%{name}-desktop.patch
+Patch0:		%{name}-desktop.patch
 URL:		http://beep-media-player.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -21,33 +16,22 @@ BuildRequires:	curl-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
+BuildRequires:	gstreamer-devel >= 0.10
 BuildRequires:	gtk+2-devel >= 2:2.8.0
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0
-BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.194
+BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel
 BuildRequires:	taglib-devel
-%if %{with gstreamer}
-BuildRequires:	gstreamer-devel >= 0.10
-%else
-BuildRequires:	xine-lib-devel
-%endif
-Obsoletes:	libchroma
-Obsoletes:	libchroma-devel
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	%{name}-plugin-container = %{version}-%{release}
-Requires:	%{name}-plugin-flow = %{version}-%{release}
-Requires:	%{name}-plugin-transport = %{version}-%{release}
-Requires:	libhrel = 0.1-2
-%if %{with gstreamer}
+Requires:	%{name}-plugis-base = %{version}-%{release}
 Requires:	gstreamer-audio-effects
 Requires:	gstreamer-audio-formats
 Requires:	gstreamer-audiosink
-%else
-Requires:	xine-plugin-audio
-%endif
+Obsoletes:	libchroma
+Obsoletes:	libchroma-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -62,22 +46,21 @@ siê na utrzymaniu stabilnej podstawy odtwarzacza d¼wiêku, aby
 udostêpniæ odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
 
 %package libs
-Summary:	BMPx player library
-Summary(pl):	Biblioteka odtwarzacza BMPx
+Summary:	BMPx player libraries
+Summary(pl):	Biblioteki odtwarzacza BMPx
 Group:		X11/Libraries
 
 %description libs
-BMPx player library.
+BMPx player libraries.
 
 %description libs -l pl
-Biblioteka odtwarzacza BMPx.
+Biblioteki odtwarzacza BMPx.
 
 %package devel
 Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	libhrel-devel = 0.1-2
 
 %description devel
 Header files required for compiling BMPx media player plugins.
@@ -98,41 +81,17 @@ Static BMPx library.
 %description static -l pl
 Statyczna biblioteka BMPx.
 
-%package plugin-container
-Summary:	Container plugin for BMPx
-Summary(pl):	Wtyczka Container dla BMPx
+%package plugins-base
+Summary:	Base plugin for BMPx
+Summary(pl):	Podstawowe wtyczki dla BMPx
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
-%description plugin-container
-Plugin providing support for folders, m3u & pls playlist files, etc.
+%description plugins-base
+Base plugin for BMPx.
 
-%description plugin-container -l pl
-Wtyczka dodaj±ca obs³ugê folderów, playlist w formacie m3u i pls, itp.
-
-%package plugin-flow
-Summary:	Flow plugin for BMPx
-Summary(pl):	Wtyczka Flow dla BMPx
-Group:		X11/Applications/Sound
-Requires:       %{name} = %{version}-%{release}
-
-%description plugin-flow
-Flow plugin for BMPx.
-
-%description plugin-flow -l pl
-Wtyczka Flow dla BMPx.
-
-%package plugin-transport
-Summary:	Transport plugin for BMPx
-Summary(pl):	Wtyczka Transport dla BMPx
-Group:		X11/Applications/Sound
-Requires:	%{name} = %{version}-%{release}
-
-%description plugin-transport
-Transport plugin for BMPx.
-
-%description plugin-transport -l pl
-Wtyczka Transport dla BMPx.
+%description plugins-base -l pl
+Podstawowe wtyczki dla BMPx.
 
 %package remote
 Summary:	BMPx python status watcher
@@ -172,51 +131,9 @@ BMPx python status watcher (GTK+ interface).
 %description remote-gtk -l pl
 Obserwator statusu BMPx w pythonie (interfejs GTK+).
 
-%package -n libhrel
-Summary:	Holyrel library
-Summary(pl):	Biblioteka Holyrel
-Version:	0.1
-Release:	2
-Group:		X11/Libraries
-
-%description -n libhrel
-Holyrel library.
-
-%description -n libhrel -l pl
-Biblioteka Holyrel.
-
-%package -n libhrel-devel
-Summary:	Header files for Holyrel library
-Summary(pl):	Pliki nag³ówkowe biblioteki Holyrel
-Version:	0.1
-Release:	2
-Group:		X11/Development/Libraries
-Requires:	libhrel = 0.1-2
-
-%description -n libhrel-devel
-Header files for Holyrel library.
-
-%description -n libhrel-devel -l pl
-Pliki nag³ówkowe biblioteki Holyrel.
-
-%package -n libhrel-static
-Summary:	Static Holyrel library
-Summary(pl):	Statyczna biblioteka Holyrel
-Version:	0.1
-Release:	2
-Group:		X11/Development/Libraries
-Requires:	libhrel-devel = 0.1-2
-
-%description -n libhrel-static
-Static Holyrel library.
-
-%description -n libhrel-static -l pl
-Statyczna biblioteka Holyrel.
-
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -225,12 +142,6 @@ Statyczna biblioteka Holyrel.
 %{__autoheader}
 %{__automake}
 %configure \
-%if %{with gstreamer}
-	--enable-gst \
-	--disable-xine
-%else
-	--enable-xine \
-%endif
 	--enable-shared \
 	--enable-static
 %{__make}
@@ -248,8 +159,7 @@ install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 mv -f $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/bmpx.png \
 	$RPM_BUILD_ROOT%{_pixmapsdir}
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/*/*.{a,la}
-rm -f $RPM_BUILD_ROOT%{_bindir}/{ctt,hash_*,hrel-demo}
+rm -f $RPM_BUILD_ROOT%{_libdir}/bmp-2.0/plugins/*/*.{a,la}
 
 %find_lang %{name}
 
@@ -260,7 +170,6 @@ rm -rf $RPM_BUILD_ROOT
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 
-%if %{with gstreamer}
 %banner %{name} -e << EOF
 Remember to install appropriate GStreamer plugins for files
 you want to play:
@@ -268,14 +177,6 @@ you want to play:
 - gstreamer-mad (for MP3s)
 - gstreamer-vorbis (for Ogg Vorbis)
 EOF
-%else
-%banner %{name} -e << EOF
-Remember to install appropriate xine-decode plugins for files
-you want to play:
-- xine-decode-flac (for FLAC)
-- xine-decode-ogg (for Ogg Vorbis)
-EOF
-%endif
 
 %postun
 if [ $1 = 0 ]; then
@@ -286,77 +187,43 @@ fi
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
-%post	-n libhrel -p /sbin/ldconfig
-%postun	-n libhrel -p /sbin/ldconfig
-
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/bmpx
-%attr(755,root,root) %{_bindir}/bmpx-dbus-*
-%dir %{_libdir}/bmpx
-%dir %{_libdir}/bmpx/plugins
-%dir %{_datadir}/bmpx-clients
-%{_mandir}/man*/*
+%attr(755,root,root) %{_bindir}/beep-media-player-2
+%attr(755,root,root) %{_bindir}/bmp-enqueue-files-2.0 
+%attr(755,root,root) %{_bindir}/bmp-enqueue-uris-2.0
+%attr(755,root,root) %{_bindir}/bmp-play-files-2.0
+%attr(755,root,root) %{_libexecdir}/beep-media-player-2-bin
+%dir %{_libdir}/bmp-2.0
+%dir %{_libdir}/bmp-2.0/plugins
 %{_datadir}/bmpx
+%{_mandir}/man*/*
 %{_desktopdir}/*
 %{_pixmapsdir}/*
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libskinned.so.*.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libskinned.so
-%{_libdir}/libskinned.la
-%{_libdir}/libgoa.a
-%{_includedir}/bmpx
-%{_includedir}/libskinned
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
+%{_includedir}/bmp-2.0
+%{_includedir}/libchroma
+%{_includedir}/libhrel
+%{_pkgconfdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libskinned.a
+%{_libdir}/lib*.a
 
-%files plugin-container
+%files plugins-base
 %defattr(644,root,root,755)
-%dir %{_libdir}/bmpx/plugins/container
-%attr(755,root,root) %{_libdir}/bmpx/plugins/container/*.so*
-
-%files plugin-flow
-%defattr(644,root,root,755)
-%dir %{_libdir}/bmpx/plugins/flow
-%attr(755,root,root) %{_libdir}/bmpx/plugins/flow/*.so*
-
-%files plugin-transport
-%defattr(644,root,root,755)
-%dir %{_libdir}/bmpx/plugins/transport
-%attr(755,root,root) %{_libdir}/bmpx/plugins/transport/*.so*
-
-%files remote
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/bmpx-remote
-
-%files remote-curses
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/bmpty
-
-%files remote-gtk
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/bmpx-client-pygtk
-%{_datadir}/bmpx-clients/pygtk
-
-%files -n libhrel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libhrel.so.*.*.*
-
-%files -n libhrel-devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libhrel.so
-%{_libdir}/libhrel.la
-%{_pkgconfigdir}/hrel.pc
-%{_includedir}/libhrel
-
-%files -n libhrel-static
-%defattr(644,root,root,755)
-%{_libdir}/libhrel.a
+%dir %{_libdir}/bmp-2.0/plugins/container
+%dir %{_libdir}/bmp-2.0/plugins/flow
+%dir %{_libdir}/bmp-2.0/plugins/transport
+%attr(755,root,root) %{_libdir}/bmp-2.0/plugins/container/*.so*
+%attr(755,root,root) %{_libdir}/bmp-2.0/plugins/flow/*.so*
+%attr(755,root,root) %{_libdir}/bmp-2.0/plugins/transport/*.so*
