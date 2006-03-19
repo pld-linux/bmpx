@@ -16,7 +16,7 @@ BuildRequires:	automake
 BuildRequires:	curl-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
-BuildRequires:	fam-devel
+BuildRequires:	gamin-devel
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.4
 BuildRequires:	gtk+2-devel >= 2:2.8.0
 BuildRequires:	libglade2-devel >= 1:2.5.1
