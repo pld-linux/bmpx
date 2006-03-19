@@ -30,7 +30,7 @@ BuildRequires:	startup-notification-devel >= 0.8
 BuildRequires:	taglib-devel >= 1.4
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-plugins-base = %{version}-%{release}
-Requires:	gstreamer-audio-effects
+Requires:	gstreamer-audio-effects-base
 Requires:	gstreamer-audio-formats
 Requires:	gstreamer-audiosink
 Obsoletes:	bmpx-curses
