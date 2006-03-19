@@ -33,6 +33,9 @@ Requires:	%{name}-plugins-base = %{version}-%{release}
 Requires:	gstreamer-audio-effects
 Requires:	gstreamer-audio-formats
 Requires:	gstreamer-audiosink
+Obsoletes:	bmpx-curses
+Obsoletes:	bmpx-remote
+Obsoletes:	bmpx-remote-gtk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
