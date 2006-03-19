@@ -67,6 +67,7 @@ Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	gtk+2-devel >= 2:2.8.0
 Obsoletes:	libchroma-devel
 Obsoletes:	libhrel-devel
 
