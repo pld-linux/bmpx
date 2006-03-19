@@ -16,22 +16,23 @@ BuildRequires:	curl-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
-BuildRequires:	gstreamer-devel >= 0.10
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.4
 BuildRequires:	gtk+2-devel >= 2:2.8.0
 BuildRequires:	libglade2-devel >= 1:2.5.1
+BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0
+BuildRequires:	libxml2-devel >= 2.6.1
+BuildRequires:	neon-devel >= 0.25.5
 BuildRequires:	rpmbuild(macros) >= 1.194
 BuildRequires:	rpm-pythonprov
-BuildRequires:	startup-notification-devel
-BuildRequires:	taglib-devel
+BuildRequires:	startup-notification-devel >= 0.8
+BuildRequires:	taglib-devel >= 1.4
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	%{name}-plugis-base = %{version}-%{release}
+Requires:	%{name}-plugins-base = %{version}-%{release}
 Requires:	gstreamer-audio-effects
 Requires:	gstreamer-audio-formats
 Requires:	gstreamer-audiosink
-Obsoletes:	libchroma
-Obsoletes:	libchroma-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,6 +50,8 @@ udostêpniæ odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
 Summary:	BMPx player libraries
 Summary(pl):	Biblioteki odtwarzacza BMPx
 Group:		X11/Libraries
+Obsoletes:	libchroma
+Obsoletes:	libhrel
 
 %description libs
 BMPx player libraries.
@@ -61,6 +64,8 @@ Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Obsoletes:	libchroma-devel
+Obsoletes:	libhrel-devel
 
 %description devel
 Header files required for compiling BMPx media player plugins.
@@ -74,6 +79,8 @@ Summary:	Static BMPx library
 Summary(pl):	Statyczna biblioteka BMPx
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Obsoletes:	libchroma-static
+Obsoletes:	libhrel-static
 
 %description static
 Static BMPx library.
@@ -82,54 +89,19 @@ Static BMPx library.
 Statyczna biblioteka BMPx.
 
 %package plugins-base
-Summary:	Base plugin for BMPx
+Summary:	Base plugins for BMPx
 Summary(pl):	Podstawowe wtyczki dla BMPx
 Group:		X11/Applications/Sound
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	bmpx-plugin-container
+Obsoletes:	bmpx-plugin-flow
+Obsoletes:	bmpx-plugin-transport
 
 %description plugins-base
-Base plugin for BMPx.
+Base plugins for BMPx.
 
 %description plugins-base -l pl
 Podstawowe wtyczki dla BMPx.
-
-%package remote
-Summary:	BMPx python status watcher
-Summary(pl):	Obserwator statusu BMPx
-Group:		X11/Applications/Sound
-Requires:	%{name} = %{version}-%{release}
-
-%description remote
-BMPx python status watcher.
-
-%description remote -l pl
-Obserwator statusu BMPx.
-
-%package remote-curses
-Summary:	BMPx python status watcher
-Summary(pl):	Obserwator statusu BMPx w pythonie
-Group:		X11/Applications/Sound
-Requires:	%{name} = %{version}-%{release}
-
-%description remote-curses
-BMPx python status watcher (CLI interface).
-
-%description remote-curses -l pl
-Obserwator statusu BMPx w pythonie (interfejs CLI).
-
-%package remote-gtk
-Summary:	BMPx python status watcher
-Summary(pl):	Obserwator statusu BMPx w pythonie
-Group:		X11/Applications/Sound
-Requires:	%{name} = %{version}-%{release}
-Requires:	python-dbus
-Requires:	python-pygtk-glade
-
-%description remote-gtk
-BMPx python status watcher (GTK+ interface).
-
-%description remote-gtk -l pl
-Obserwator statusu BMPx w pythonie (interfejs GTK+).
 
 %prep
 %setup -q
@@ -141,9 +113,11 @@ Obserwator statusu BMPx w pythonie (interfejs GTK+).
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+
 %configure \
 	--enable-shared \
-	--enable-static
+	--enable-static \
+	--with-dbus-services-dir=%{_datadir}/dbus-1/services
 %{__make}
 
 %install
@@ -198,6 +172,7 @@ fi
 %dir %{_libdir}/bmp-2.0
 %dir %{_libdir}/bmp-2.0/plugins
 %{_datadir}/bmpx
+%{_datadir}/dbus-1/services/*.service
 %{_mandir}/man*/*
 %{_desktopdir}/*
 %{_pixmapsdir}/*
@@ -213,7 +188,7 @@ fi
 %{_includedir}/bmp-2.0
 %{_includedir}/libchroma
 %{_includedir}/libhrel
-%{_pkgconfdir}/*.pc
+%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
