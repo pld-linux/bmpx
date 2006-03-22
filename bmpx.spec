@@ -1,15 +1,14 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.14
-Release:	1.1
+Version:	0.14.2
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/beepmp/%{name}-%{version}.tar.bz2
-# Source0-md5:	d049ec4c59ec5a0596eab32b1a70b2a9
+# Source0-md5:	ae4bd51b8a345957584530a59c9dfa9f
 Source1:	mp3license
 Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-libexec.patch
 URL:		http://beep-media-player.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -19,13 +18,14 @@ BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	gamin-devel
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.4
 BuildRequires:	gtk+2-devel >= 2:2.8.0
+BuildRequires:	hal-devel
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	libxml2-devel >= 2.6.1
 BuildRequires:	neon-devel >= 0.25.5
-BuildRequires:	rpmbuild(macros) >= 1.194
+BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel >= 0.8
 BuildRequires:	taglib-devel >= 1.4
@@ -111,7 +111,6 @@ Podstawowe wtyczki dla BMPx.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -121,6 +120,7 @@ Podstawowe wtyczki dla BMPx.
 %{__automake}
 
 %configure \
+	--enable-hal \
 	--enable-shared \
 	--enable-static \
 	--with-dbus-services-dir=%{_datadir}/dbus-1/services
@@ -147,9 +147,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/bmp-2.0/plugins/*/*.{a,la}
 rm -rf $RPM_BUILD_ROOT
 
 %post
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
-
+%update_desktop_database_post
 %banner %{name} -e << EOF
 Remember to install appropriate GStreamer plugins for files
 you want to play:
@@ -159,10 +157,7 @@ you want to play:
 EOF
 
 %postun
-if [ $1 = 0 ]; then
-    umask 022
-    [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
-fi
+%update_desktop_database_postun
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
