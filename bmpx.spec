@@ -12,9 +12,11 @@ Patch0:		%{name}-desktop.patch
 URL:		http://beep-media-player.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bison
 BuildRequires:	curl-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	esound-devel >= 0.2.8
+BuildRequires:	flex
 BuildRequires:	gamin-devel
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.4
 BuildRequires:	gtk+2-devel >= 2:2.8.0
