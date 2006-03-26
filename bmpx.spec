@@ -31,9 +31,11 @@ BuildRequires:	startup-notification-devel >= 0.8
 BuildRequires:	taglib-devel >= 1.4
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-plugins-base = %{version}-%{release}
+Requires:	desktop-file-utils
 Requires:	gstreamer-audio-effects-base
 Requires:	gstreamer-audio-formats
 Requires:	gstreamer-audiosink
+Requires:	shared-mime-info
 Obsoletes:	bmpx-curses
 Obsoletes:	bmpx-remote
 Obsoletes:	bmpx-remote-gtk
@@ -148,6 +150,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_desktop_database_post
+
+umask 022
+/usr/bin/update-mime-database %{_datadir}/mime || :
+
 %banner %{name} -e << EOF
 Remember to install appropriate GStreamer plugins for files
 you want to play:
@@ -158,6 +164,10 @@ EOF
 
 %postun
 %update_desktop_database_postun
+if [ $1 = 0 ]; then
+        umask 022
+        /usr/bin/update-mime-database %{_datadir}/mime
+fi
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
