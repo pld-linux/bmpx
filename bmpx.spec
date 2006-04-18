@@ -1,12 +1,12 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.14.2
+Version:	0.14.3
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/beepmp/%{name}-%{version}.tar.bz2
-# Source0-md5:	ae4bd51b8a345957584530a59c9dfa9f
+# Source0-md5:	6b034e7e68d003d2fcb8e0f3415df25c
 Source1:	mp3license
 Patch0:		%{name}-desktop.patch
 URL:		http://beep-media-player.org/
