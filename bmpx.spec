@@ -1,46 +1,56 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.14.4
+Version:	0.20.3
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
-Source0:	http://dl.sourceforge.net/beepmp/%{name}-%{version}.tar.bz2
-# Source0-md5:	cd89d4afdf64bdf483c8ffcdacd7a009
+Source0:	http://files.beep-media-player.org/releases/0.20/%{name}-%{version}.tar.bz2
+# Source0-md5:	ba4b5765de7a643f1c680ba9ca6d6225
 Source1:	mp3license
 Patch0:		%{name}-desktop.patch
 URL:		http://beep-media-player.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
+BuildRequires:	boost-bind-devel
+BuildRequires:	boost-call_traits-devel
+BuildRequires:	boost-devel
+BuildRequires:	boost-filesystem-devel
 BuildRequires:	curl-devel
-BuildRequires:	dbus-glib-devel
+BuildRequires:	dbus-glib-devel >= 0.62
 BuildRequires:	esound-devel >= 0.2.8
+BuildRequires:	fam-devel
 BuildRequires:	flex
-BuildRequires:	gamin-devel
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.4
-BuildRequires:	gtk+2-devel >= 2:2.8.0
-BuildRequires:	hal-devel
-BuildRequires:	libglade2-devel >= 1:2.5.1
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.9
+BuildRequires:	gtkmm-devel >= 2.9.8
+BuildRequires:	hal-devel >= 0.5.7
+BuildRequires:	libglademm-devel >= 2.6.2
+BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0
-BuildRequires:	libxml2-devel >= 2.6.1
+BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	neon-devel >= 0.25.5
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel >= 0.8
 BuildRequires:	taglib-devel >= 1.4
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	%{name}-plugins-base = %{version}-%{release}
-Requires:	desktop-file-utils
-Requires:	gstreamer-audio-effects-base
-Requires:	gstreamer-audio-formats
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk+2 >= 2.10.0
+Requires(post,postun):	shared-mime-info
+Requires:	gstreamer-audio-effects-base >= 0.10.9
+Requires:	gstreamer-audio-formats >= 0.10.3
 Requires:	gstreamer-audiosink
-Requires:	shared-mime-info
 Obsoletes:	bmpx-curses
+Obsoletes:	bmpx-libs
+Obsoletes:	bmpx-plugin-container
+Obsoletes:	bmpx-plugin-flow
+Obsoletes:	bmpx-plugins-base
+Obsoletes:	bmpx-plugin-transport
 Obsoletes:	bmpx-remote
 Obsoletes:	bmpx-remote-gtk
+Obsoletes:	bmpx-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,25 +64,11 @@ BMPx jest nastêpc± projektu BMP z przepisanym od zera kodem i skupia
 siê na utrzymaniu stabilnej podstawy odtwarzacza d¼wiêku, aby
 udostêpniæ odtwarzacz ze spójn± i ³atw± do zrozumienia obs³ug±.
 
-%package libs
-Summary:	BMPx player libraries
-Summary(pl):	Biblioteki odtwarzacza BMPx
-Group:		X11/Libraries
-Obsoletes:	libchroma
-Obsoletes:	libhrel
-
-%description libs
-BMPx player libraries.
-
-%description libs -l pl
-Biblioteki odtwarzacza BMPx.
-
 %package devel
 Summary:	Header files for BMPx media player
 Summary(pl):	Pliki nag³ówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	gtk+2-devel >= 2:2.8.0
+Requires:	dbus-glib-devel >= 0.62
 Obsoletes:	libchroma-devel
 Obsoletes:	libhrel-devel
 
@@ -82,35 +78,6 @@ Header files required for compiling BMPx media player plugins.
 %description devel -l pl
 Pliki nag³ówkowe potrzebne do kompilowania wtyczek odtwarzacza
 multimedialnego BMPx.
-
-%package static
-Summary:	Static BMPx library
-Summary(pl):	Statyczna biblioteka BMPx
-Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-Obsoletes:	libchroma-static
-Obsoletes:	libhrel-static
-
-%description static
-Static BMPx library.
-
-%description static -l pl
-Statyczna biblioteka BMPx.
-
-%package plugins-base
-Summary:	Base plugins for BMPx
-Summary(pl):	Podstawowe wtyczki dla BMPx
-Group:		X11/Applications/Sound
-Requires:	%{name} = %{version}-%{release}
-Obsoletes:	bmpx-plugin-container
-Obsoletes:	bmpx-plugin-flow
-Obsoletes:	bmpx-plugin-transport
-
-%description plugins-base
-Base plugins for BMPx.
-
-%description plugins-base -l pl
-Podstawowe wtyczki dla BMPx.
 
 %prep
 %setup -q
@@ -122,7 +89,7 @@ Podstawowe wtyczki dla BMPx.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-
+LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--enable-hal \
 	--enable-shared \
@@ -138,12 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 	m4datadir=%{_aclocaldir}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/bmpx/data/GPL.txt
-
-install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-mv -f $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/bmpx.png \
-	$RPM_BUILD_ROOT%{_pixmapsdir}
-
-rm -f $RPM_BUILD_ROOT%{_libdir}/bmp-2.0/plugins/*/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/{flow,vfs/container,vfs/transport}/*.{a,la}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/th_TH
 
 %find_lang %{name}
 
@@ -152,13 +115,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_desktop_database_post
-
 umask 022
 /usr/bin/update-mime-database %{_datadir}/mime || :
+gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 
 %banner %{name} -e << EOF
 Remember to install appropriate GStreamer plugins for files
 you want to play:
+- gstreamer-cdparanoia (for Audio-CD)
 - gstreamer-flac (for FLAC)
 - gstreamer-mad (for MP3s)
 - gstreamer-vorbis (for Ogg Vorbis)
@@ -166,13 +130,11 @@ EOF
 
 %postun
 %update_desktop_database_postun
+gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 if [ $1 = 0 ]; then
         umask 022
         /usr/bin/update-mime-database %{_datadir}/mime
 fi
-
-%post	libs -p /sbin/ldconfig
-%postun	libs -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -182,36 +144,25 @@ fi
 %attr(755,root,root) %{_bindir}/bmp-enqueue-uris-2.0
 %attr(755,root,root) %{_bindir}/bmp-play-files-2.0
 %attr(755,root,root) %{_libexecdir}/beep-media-player-2-bin
-%dir %{_libdir}/bmp-2.0
-%dir %{_libdir}/bmp-2.0/plugins
+
+%dir %{_libdir}/bmpx
+%dir %{_libdir}/bmpx/plugins
+%dir %{_libdir}/bmpx/plugins/flow
+%dir %{_libdir}/bmpx/plugins/vfs
+%dir %{_libdir}/bmpx/plugins/vfs/container
+%dir %{_libdir}/bmpx/plugins/vfs/transport
+%attr(755,root,root) %{_libdir}/bmpx/plugins/flow/*.so*
+%attr(755,root,root) %{_libdir}/bmpx/plugins/vfs/container/*.so*
+%attr(755,root,root) %{_libdir}/bmpx/plugins/vfs/transport/*.so*
+
 %{_datadir}/bmpx
 %{_datadir}/dbus-1/services/*.service
+%{_datadir}/mime/packages/*.xml
 %{_mandir}/man*/*
 %{_desktopdir}/*
-%{_pixmapsdir}/*
-
-%files libs
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%{_iconsdir}/hicolor/*/*/*.png
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
 %{_includedir}/bmp-2.0
-%{_includedir}/libchroma
-%{_includedir}/libhrel
 %{_pkgconfigdir}/*.pc
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/lib*.a
-
-%files plugins-base
-%defattr(644,root,root,755)
-%dir %{_libdir}/bmp-2.0/plugins/container
-%dir %{_libdir}/bmp-2.0/plugins/flow
-%dir %{_libdir}/bmp-2.0/plugins/transport
-%attr(755,root,root) %{_libdir}/bmp-2.0/plugins/container/*.so*
-%attr(755,root,root) %{_libdir}/bmp-2.0/plugins/flow/*.so*
-%attr(755,root,root) %{_libdir}/bmp-2.0/plugins/transport/*.so*
