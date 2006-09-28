@@ -1,7 +1,7 @@
-diff -urpN bmpx-0.14.2.vanilla/desktop/bmp-2.0.desktop.in bmpx-0.14.2/desktop/bmp-2.0.desktop.in
---- bmpx-0.14.2.vanilla/desktop/bmp-2.0.desktop.in	2006-03-22 17:00:36.000000000 +0100
-+++ bmpx-0.14.2/desktop/bmp-2.0.desktop.in	2006-03-22 17:01:22.000000000 +0100
-@@ -6,7 +6,7 @@ Exec=beep-media-player-2
+diff -urN bmpx-0.30.3.orig/data/desktop/bmp-2.0.desktop.in bmpx-0.30.3/data/desktop/bmp-2.0.desktop.in
+--- bmpx-0.30.3.orig/data/desktop/bmp-2.0.desktop.in	2006-09-28 14:47:44.631834000 +0200
++++ bmpx-0.30.3/data/desktop/bmp-2.0.desktop.in	2006-09-28 14:49:34.462698000 +0200
+@@ -11,7 +11,7 @@
  Icon=bmpx
  #MimeType=audio/x-scpls;audio/x-mpegurl;audio/mpegurl;audio/mp3;audio/x-mp3;audio/mpeg;audio/x-mpeg;audio/x-wav;application/x-ogg;
  #Actions=Enqueue;Play;
