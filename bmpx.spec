@@ -2,7 +2,7 @@ Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.30.3
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.beep-media-player.org/releases/0.30/%{name}-%{version}.tar.bz2
@@ -32,12 +32,13 @@ BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	neon-devel >= 0.25.5
-BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel >= 0.8
 BuildRequires:	taglib-devel >= 1.4
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	gtk+2 >= 2.10.0
+Requires(post,postun):	gtk+2 >= 2:2.10.0
+Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
 Requires:	gstreamer-audio-effects-base >= 0.10.9
 Requires:	gstreamer-audio-formats >= 0.10.3
@@ -89,7 +90,6 @@ multimedialnego BMPx.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--enable-hal \
 	--enable-shared \
@@ -115,9 +115,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_desktop_database_post
-umask 022
-/usr/bin/update-mime-database %{_datadir}/mime || :
-gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
+%update_mime_database
+%update_icon_cache hicolor
 
 %banner %{name} -e << EOF
 Remember to install appropriate GStreamer plugins for files
@@ -130,11 +129,8 @@ EOF
 
 %postun
 %update_desktop_database_postun
-gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
-if [ $1 = 0 ]; then
-        umask 022
-        /usr/bin/update-mime-database %{_datadir}/mime
-fi
+%update_mime_database
+%update_icon_cache hicolor
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
