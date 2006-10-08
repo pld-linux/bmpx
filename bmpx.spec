@@ -1,10 +1,11 @@
 # 
 # TODO: add subpackage with bmpx.xpi (lastm:// URIs support in firefox)
-
+#
+# Conditional build:
 %bcond_without  gaim	# build without D-BUS gaim support
 %bcond_without  sid	# build without sid support
 %bcond_without  ofa	# build without MusicIP support
-
+#
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
