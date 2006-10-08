@@ -1,8 +1,15 @@
+# 
+# TODO: add subpackage with bmpx.xpi (lastm:// URIs support in firefox)
+
+%bcond_without  gaim	# build without D-BUS gaim support
+%bcond_without  sid	# build without sid support
+%bcond_without  ofa	# build without MusicIP support
+
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.32.0
-Release:	1
+Release:	1.1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.beep-media-player.org/releases/0.30/%{name}-%{version}.tar.bz2
@@ -22,15 +29,19 @@ BuildRequires:	dbus-glib-devel >= 0.62
 BuildRequires:	esound-devel >= 0.2.8
 BuildRequires:	fam-devel
 BuildRequires:	flex
+%{?with_gaim:BuildRequires:	gaim-devel}
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.9
 BuildRequires:	gtkmm-devel >= 2.9.8
 BuildRequires:	hal-devel >= 0.5.7
 BuildRequires:	libglademm-devel >= 2.6.2
 BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
+%{?with_ofa:BuildRequires:	libofa-devel >= 0.9.3}
+%{?with_sid:BuildRequires:	libsidplay-devel}
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	libxml2-devel >= 1:2.6.26
+BuildRequires:	mpeg4ip-devel
 BuildRequires:	neon-devel >= 0.25.5
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	rpm-pythonprov
@@ -92,8 +103,14 @@ multimedialnego BMPx.
 %{__automake}
 %configure \
 	--enable-hal \
+	--enable-gamin \
+	--enable-libnotify \
+	--enable-mp4v2 \
+	%{?with_ofa:--enable-ofa} \
+	%{?with_sid:--enable-sid} \
 	--enable-shared \
 	--enable-static \
+	%{?with_gaim:--enable-gaim} \
 	--with-dbus-services-dir=%{_datadir}/dbus-1/services
 %{__make}
 
