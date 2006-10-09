@@ -1,5 +1,3 @@
-# 
-# TODO: add subpackage with bmpx.xpi (lastm:// URIs support in firefox)
 #
 # Conditional build:
 %bcond_without	gaim	# build without D-BUS gaim support
@@ -10,7 +8,7 @@ Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl):	Odtwarzacz d¼wiêku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.32.0
-Release:	1.1
+Release:	1.2
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.beep-media-player.org/releases/0.30/%{name}-%{version}.tar.bz2
@@ -48,6 +46,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel >= 0.8
 BuildRequires:	taglib-devel >= 1.4
+BuildRequires:	unzip
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2 >= 2:2.10.0
 Requires(post,postun):	hicolor-icon-theme
@@ -65,6 +64,9 @@ Obsoletes:	bmpx-remote
 Obsoletes:	bmpx-remote-gtk
 Obsoletes:	bmpx-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_firefoxdir	%{_libdir}/mozilla-firefox
+%define		_chromedir	%{_firefoxdir}/chrome
 
 %description
 BMPx is the follow-up of the BMP project with a codebase rewritten
@@ -92,6 +94,19 @@ Header files required for compiling BMPx media player plugins.
 Pliki nag³ówkowe potrzebne do kompilowania wtyczek odtwarzacza
 multimedialnego BMPx.
 
+%package -n mozilla-firefox-plugin-bmpx
+Summary:	BMPx plugin for Mozilla Firefox
+Summary(pl):	Wtyczka BMPx dla Mozilli Firefox
+Group:		X11/Applications
+Requires:	bmpx
+Requires:	mozilla-firefox
+
+%description -n mozilla-firefox-plugin-bmpx
+This plugin registers the lastfm:// protocol to BMPx.
+
+%description -n mozilla-firefox-plugin-bmpx -l pl
+Ta wtyczka rejestruje protokó³ lastfm:// do BMPx.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -117,11 +132,17 @@ multimedialnego BMPx.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_chromedir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	m4datadir=%{_aclocaldir}
 
+unzip xpi/bmp.xpi -d $RPM_BUILD_ROOT%{_firefoxdir}
+sed -e 's@chrome/bmp\.jar@bmp\.jar@' $RPM_BUILD_ROOT%{_firefoxdir}/chrome.manifest \
+	> $RPM_BUILD_ROOT%{_chromedir}/bmp.manifest
+
+rm -f $RPM_BUILD_ROOT%{_firefoxdir}/{install.rdf,chrome.manifest}
 rm -f $RPM_BUILD_ROOT%{_datadir}/bmpx/data/GPL.txt
 rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/{flow,vfs/container,vfs/transport}/*.{a,la}
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/th_TH
@@ -181,3 +202,8 @@ EOF
 %defattr(644,root,root,755)
 %{_includedir}/bmp-2.0
 %{_pkgconfigdir}/*.pc
+
+%files -n mozilla-firefox-plugin-bmpx
+%defattr(644,root,root,755)
+%{_chromedir}/bmp.jar
+%{_chromedir}/bmp.manifest
