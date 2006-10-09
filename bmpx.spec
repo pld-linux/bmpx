@@ -1,3 +1,4 @@
+# TODO: use browser-plugins if plugin works with something else than firefox (e.g. seamonkey)
 #
 # Conditional build:
 %bcond_without	gaim	# build without D-BUS gaim support
@@ -98,7 +99,7 @@ multimedialnego BMPx.
 Summary:	BMPx plugin for Mozilla Firefox
 Summary(pl):	Wtyczka BMPx dla Mozilli Firefox
 Group:		X11/Applications
-Requires:	bmpx
+Requires:	%{name} = %{version}-%{release}
 Requires:	mozilla-firefox
 
 %description -n mozilla-firefox-plugin-bmpx
