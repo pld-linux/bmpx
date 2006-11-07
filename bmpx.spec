@@ -196,7 +196,7 @@ EOF
 %{_datadir}/dbus-1/services/*.service
 %{_datadir}/mime/packages/*.xml
 %{_mandir}/man*/*
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/*/*.png
 
 %files devel
