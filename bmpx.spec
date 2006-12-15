@@ -24,6 +24,7 @@ BuildRequires:	boost-bind-devel
 BuildRequires:	boost-call_traits-devel
 BuildRequires:	boost-devel
 BuildRequires:	boost-filesystem-devel
+BuildRequires:	cdparanoia-III-devel
 BuildRequires:	curl-devel
 BuildRequires:	dbus-glib-devel >= 0.62
 BuildRequires:	esound-devel >= 0.2.8
