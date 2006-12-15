@@ -24,6 +24,7 @@ BuildRequires:	boost-bind-devel
 BuildRequires:	boost-call_traits-devel
 BuildRequires:	boost-devel
 BuildRequires:	boost-filesystem-devel
+BuildRequires:	boost-regex-devel
 BuildRequires:	cdparanoia-III-devel
 BuildRequires:	curl-devel
 BuildRequires:	dbus-glib-devel >= 0.62
