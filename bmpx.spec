@@ -33,7 +33,7 @@ BuildRequires:	fam-devel
 BuildRequires:	flex
 %{?with_gaim:BuildRequires:	gaim-devel}
 BuildRequires:	gcc-c++ >= 5:4.0.0
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.9
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.10
 BuildRequires:	gtkmm-devel >= 2.9.8
 BuildRequires:	hal-devel >= 0.5.7
 BuildRequires:	libglademm-devel >= 2.6.2
@@ -49,13 +49,13 @@ BuildRequires:	neon-devel >= 0.25.5
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	rpm-pythonprov
 BuildRequires:	startup-notification-devel >= 0.8
-BuildRequires:	taglib-devel >= 1.4
+BuildRequires:	taglib-devel >= 1.4-2
 BuildRequires:	unzip
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2 >= 2:2.10.0
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
-Requires:	gstreamer-audio-effects-base >= 0.10.9
+Requires:	gstreamer-audio-effects-base >= 0.10.10
 Requires:	gstreamer-audio-formats >= 0.10.3
 Requires:	gstreamer-audiosink
 Obsoletes:	bmpx-curses
