@@ -40,6 +40,7 @@ BuildRequires:	libglademm-devel >= 2.6.2
 BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
 %{?with_ofa:BuildRequires:	libofa-devel >= 0.9.3}
+BuildRequires:	librsvg-devel >= 1:2.14.0
 %{?with_sid:BuildRequires:	libsidplay-devel}
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0
