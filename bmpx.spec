@@ -6,7 +6,7 @@
 %bcond_without	ofa	# build without MusicIP support
 #
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
-Summary(pl.UTF-8):   Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
+Summary(pl.UTF-8):	Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.36.1
 Release:	1
@@ -86,7 +86,7 @@ udostępnić odtwarzacz ze spójną i łatwą do zrozumienia obsługą.
 
 %package devel
 Summary:	Header files for BMPx media player
-Summary(pl.UTF-8):   Pliki nagłówkowe odtwarzacza multimedialnego BMPx
+Summary(pl.UTF-8):	Pliki nagłówkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
 Requires:	dbus-glib-devel >= 0.62
 Obsoletes:	libchroma-devel
@@ -101,7 +101,7 @@ multimedialnego BMPx.
 
 %package -n mozilla-firefox-plugin-bmpx
 Summary:	BMPx plugin for Mozilla Firefox
-Summary(pl.UTF-8):   Wtyczka BMPx dla Mozilli Firefox
+Summary(pl.UTF-8):	Wtyczka BMPx dla Mozilli Firefox
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	mozilla-firefox
