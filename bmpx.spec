@@ -6,7 +6,7 @@
 %bcond_without	ofa	# build without MusicIP support
 #
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
-Summary(pl):	Odtwarzacz dºwiÍku z interfejsem WinAmpa dla GTK+
+Summary(pl.UTF-8):   Odtwarzacz d≈∫wiƒôku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.36.1
 Release:	1
@@ -79,14 +79,14 @@ from scratch and aims to maintain a stable audio player foundation,
 and to provide a player with a consistent and easy to understand usage
 experience.
 
-%description -l pl
-BMPx jest nastÍpc± projektu BMP z przepisanym od zera kodem i skupia
-siÍ na utrzymaniu stabilnej podstawy odtwarzacza dºwiÍku, aby
-udostÍpniÊ odtwarzacz ze spÛjn± i ≥atw± do zrozumienia obs≥ug±.
+%description -l pl.UTF-8
+BMPx jest nastƒôpcƒÖ projektu BMP z przepisanym od zera kodem i skupia
+siƒô na utrzymaniu stabilnej podstawy odtwarzacza d≈∫wiƒôku, aby
+udostƒôpniƒá odtwarzacz ze sp√≥jnƒÖ i ≈ÇatwƒÖ do zrozumienia obs≈ÇugƒÖ.
 
 %package devel
 Summary:	Header files for BMPx media player
-Summary(pl):	Pliki nag≥Ûwkowe odtwarzacza multimedialnego BMPx
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe odtwarzacza multimedialnego BMPx
 Group:		X11/Development/Libraries
 Requires:	dbus-glib-devel >= 0.62
 Obsoletes:	libchroma-devel
@@ -95,13 +95,13 @@ Obsoletes:	libhrel-devel
 %description devel
 Header files required for compiling BMPx media player plugins.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe potrzebne do kompilowania wtyczek odtwarzacza
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe potrzebne do kompilowania wtyczek odtwarzacza
 multimedialnego BMPx.
 
 %package -n mozilla-firefox-plugin-bmpx
 Summary:	BMPx plugin for Mozilla Firefox
-Summary(pl):	Wtyczka BMPx dla Mozilli Firefox
+Summary(pl.UTF-8):   Wtyczka BMPx dla Mozilli Firefox
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	mozilla-firefox
@@ -109,8 +109,8 @@ Requires:	mozilla-firefox
 %description -n mozilla-firefox-plugin-bmpx
 This plugin registers the lastfm:// protocol to BMPx.
 
-%description -n mozilla-firefox-plugin-bmpx -l pl
-Ta wtyczka rejestruje protokÛ≥ lastfm:// do BMPx.
+%description -n mozilla-firefox-plugin-bmpx -l pl.UTF-8
+Ta wtyczka rejestruje protok√≥≈Ç lastfm:// do BMPx.
 
 %prep
 %setup -q
