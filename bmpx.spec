@@ -1,3 +1,4 @@
+# TODO: use system libuuid instead of included one
 # TODO: use browser-plugins if plugin works with something else than firefox (e.g. seamonkey)
 #
 # Conditional build:
@@ -36,7 +37,6 @@ BuildRequires:	gcc-c++ >= 5:4.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.10
 BuildRequires:	gtkmm-devel >= 2.9.8
 BuildRequires:	hal-devel >= 0.5.7
-BuildRequires:	libcom_err-devel
 BuildRequires:	libglademm-devel >= 2.6.2
 BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
@@ -44,7 +44,7 @@ BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	librsvg-devel >= 1:2.14.0
 %{?with_sid:BuildRequires:	libsidplay-devel}
 BuildRequires:	libtool
-BuildRequires:	libuuid-devel
+#BuildRequires:	libuuid-devel
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	mpeg4ip-devel
@@ -132,7 +132,6 @@ Ta wtyczka rejestruje protokół lastfm:// do BMPx.
 	%{?with_ofa:--enable-ofa} \
 	%{?with_sid:--enable-sid} \
 	--enable-shared \
-	--enable-static \
 	%{?with_gaim:--enable-gaim} \
 	--with-dbus-services-dir=%{_datadir}/dbus-1/services
 %{__make}
@@ -151,7 +150,7 @@ sed -e 's@chrome/bmp\.jar@bmp\.jar@' $RPM_BUILD_ROOT%{_firefoxdir}/chrome.manife
 
 rm -f $RPM_BUILD_ROOT%{_firefoxdir}/{install.rdf,chrome.manifest}
 rm -f $RPM_BUILD_ROOT%{_datadir}/bmpx/data/GPL.txt
-rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/{taglib,vfs/container,vfs/transport}/*.{a,la}
+rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/{taglib,vfs/container,vfs/transport}/*.la
 rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/th_TH
 
 %find_lang %{name}
