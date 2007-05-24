@@ -36,6 +36,7 @@ BuildRequires:	gcc-c++ >= 5:4.0.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.10
 BuildRequires:	gtkmm-devel >= 2.9.8
 BuildRequires:	hal-devel >= 0.5.7
+BuildRequires:	libcom_err-devel
 BuildRequires:	libglademm-devel >= 2.6.2
 BuildRequires:	libnotify-devel >= 0.4.2
 BuildRequires:	libmusicbrainz-devel >= 2.1.1
@@ -43,6 +44,7 @@ BuildRequires:	libmusicbrainz-devel >= 2.1.1
 BuildRequires:	librsvg-devel >= 1:2.14.0
 %{?with_sid:BuildRequires:	libsidplay-devel}
 BuildRequires:	libtool
+BuildRequires:	libuuid-devel
 BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	mpeg4ip-devel
