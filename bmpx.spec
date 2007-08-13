@@ -1,4 +1,3 @@
-# TODO: use browser-plugins if plugin works with something else than firefox (e.g. seamonkey)
 #
 # Conditional build:
 %bcond_without	sid	# build without sid support
@@ -7,7 +6,7 @@ Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl.UTF-8):	Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.40.1
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.beep-media-player.org/releases/0.40/%{name}-%{version}.tar.bz2
@@ -52,9 +51,18 @@ BuildRequires:	xorg-lib-libSM-devel
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2 >= 2:2.10.0
 Requires(post,postun):	hicolor-icon-theme
-Requires:	gstreamer-audio-effects-base >= 0.10.10
-Requires:	gstreamer-audio-formats >= 0.10.3
 Requires:	gstreamer-audiosink
+Suggests:	gstreamer-aac
+Suggests:	gstreamer-audio-formats >= 0.10.3
+Suggests:	gstreamer-cdparanoia
+Suggests:	gstreamer-ffmpeg
+Suggests:	gstreamer-flac
+Suggests:	gstreamer-mad
+Suggests:	gstreamer-mms
+Suggests:	gstreamer-musepack
+Suggests:	gstreamer-plugins-bad
+Suggests:	gstreamer-sid
+Suggests:	gstreamer-vorbis
 Obsoletes:	bmpx-curses
 Obsoletes:	bmpx-libs
 Obsoletes:	bmpx-plugin-container
@@ -151,15 +159,6 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %update_desktop_database_post
 %update_icon_cache hicolor
-
-%banner %{name} -e << EOF
-Remember to install appropriate GStreamer plugins for files
-you want to play:
-- gstreamer-cdparanoia (for Audio-CD)
-- gstreamer-flac (for FLAC)
-- gstreamer-mad (for MP3s)
-- gstreamer-vorbis (for Ogg Vorbis)
-EOF
 
 %postun
 /sbin/ldconfig
