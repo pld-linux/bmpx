@@ -1,0 +1,17 @@
+diff -urN bmpx-0.40.13.orig/src/library.cc bmpx-0.40.13/src/library.cc
+--- bmpx-0.40.13.orig/src/library.cc	2007-10-18 19:17:08.000000000 +0200
++++ bmpx-0.40.13/src/library.cc	2007-10-22 13:30:04.000000000 +0200
+@@ -1938,10 +1938,10 @@
+                                      % attrinfo[ATTRIBUTE_LOCATION].id).str());
+ #endif //HAVE_HAL
+ 
+-      try{
++      if(m_db->table_exists("track_v"))
++      {
+         m_db->exec_sql ("DROP VIEW track_v");
+-        }
+-      catch (...) {}
++      }
+ 
+       m_db->exec_sql
+ 
