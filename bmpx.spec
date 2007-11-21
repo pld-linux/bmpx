@@ -6,12 +6,13 @@ Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl.UTF-8):	Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.40.13
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.beep-media-player.org/releases/0.40/%{name}-%{version}.tar.bz2
 # Source0-md5:	11da3d4c63e77dc15a53d0c6c25ddadb
 Source1:	mp3license
+Patch0:		%{name}-sql_check.patch
 URL:		http://beep-media-player.org/
 BuildRequires:	alsa-lib-devel >= 1.0.9
 BuildRequires:	autoconf >= 2.60
@@ -117,6 +118,7 @@ Ta wtyczka rejestruje protokół lastfm:// do BMPx.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -145,7 +147,6 @@ sed -e 's@chrome/bmp\.jar@bmp\.jar@' $RPM_BUILD_ROOT%{_firefoxdir}/chrome.manife
 rm -f $RPM_BUILD_ROOT%{_firefoxdir}/{install.rdf,chrome.manifest}
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/{taglib,vfs/container,vfs/transport}/*.la
-mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{dk,da}
 mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{th_TH,th}
 
 %find_lang %{name}
@@ -167,13 +168,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/beep-media-player-2
-%attr(755,root,root) %{_bindir}/bmp-enqueue-files-2.0
-%attr(755,root,root) %{_bindir}/bmp-enqueue-uris-2.0
 %attr(755,root,root) %{_bindir}/bmp-play-files-2.0
-%attr(755,root,root) %{_bindir}/bmp-play-lastfm-2.0
+%attr(755,root,root) %{_bindir}/bmp-play-uris-2.0
 %attr(755,root,root) %{_libexecdir}/beep-media-player-2-bin
 %attr(755,root,root) %{_libexecdir}/beep-media-player-2-sentinel
-%attr(755,root,root) %{_libdir}/libbmp_id3v2_reader.so.*.*.*
 
 %dir %{_libdir}/bmpx
 %dir %{_libdir}/bmpx/plugins
