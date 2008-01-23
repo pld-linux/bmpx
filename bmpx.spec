@@ -11,7 +11,6 @@ License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.backtrace.info/releases/0.40/%{name}-%{version}.tar.bz2
 # Source0-md5:	11da3d4c63e77dc15a53d0c6c25ddadb
-Source1:	mp3license
 Patch0:		%{name}-sql_check.patch
 Patch1:		%{name}-lib64.patch
 URL:		http://bmpx.backtrace.info/
