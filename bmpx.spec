@@ -19,11 +19,7 @@ URL:		http://bmpx.backtrace.info/
 BuildRequires:	alsa-lib-devel >= 1.0.9
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.8
-BuildRequires:	boost-bind-devel
-BuildRequires:	boost-call_traits-devel
-BuildRequires:	boost-devel >= 1.33.1
-BuildRequires:	boost-filesystem-devel
-BuildRequires:	boost-regex-devel
+BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairomm-devel >= 0.6.0
 BuildRequires:	cdparanoia-III-devel
 BuildRequires:	dbus-glib-devel >= 0.62
