@@ -5,16 +5,15 @@
 Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl.UTF-8):	Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
-Version:	0.40.13
-Release:	7
+Version:	0.40.14
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.backtrace.info/releases/0.40/%{name}-%{version}.tar.bz2
-# Source0-md5:	11da3d4c63e77dc15a53d0c6c25ddadb
-Patch0:		%{name}-sql_check.patch
-Patch1:		%{name}-lib64.patch
-Patch2:		%{name}-libsoup24.patch
-Patch3:		%{name}-invalid-conversion.patch
+# Source0-md5:	c741e05a82a82b14b6775d44a7c93c15
+Patch0:		%{name}-lib64.patch
+Patch1:		%{name}-libsoup24.patch
+Patch2:		%{name}-invalid-conversion.patch
 URL:		http://bmpx.backtrace.info/
 BuildRequires:	alsa-lib-devel >= 1.0.9
 BuildRequires:	autoconf >= 2.60
@@ -119,7 +118,6 @@ Ta wtyczka rejestruje protokół lastfm:// do BMPx.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__libtoolize}
