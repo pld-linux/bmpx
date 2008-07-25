@@ -14,6 +14,7 @@ Source0:	http://files.backtrace.info/releases/0.40/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-lib64.patch
 Patch1:		%{name}-libsoup24.patch
 Patch2:		%{name}-invalid-conversion.patch
+Patch3:		%{name}-sidplay.patch
 URL:		http://bmpx.backtrace.info/
 BuildRequires:	alsa-lib-devel >= 1.0.9
 BuildRequires:	autoconf >= 2.60
@@ -123,6 +124,7 @@ lastfm:// do BMPx.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
