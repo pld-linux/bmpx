@@ -6,7 +6,7 @@ Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl.UTF-8):	Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.40.14
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.backtrace.info/releases/0.40/%{name}-%{version}.tar.bz2
@@ -48,6 +48,7 @@ BuildRequires:	xorg-lib-libSM-devel
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2 >= 2:2.10.0
 Requires(post,postun):	hicolor-icon-theme
+Requires:	gstreamer-audio-effects-base
 Requires:	gstreamer-audiosink
 Suggests:	gstreamer-aac
 Suggests:	gstreamer-audio-formats >= 0.10.3
