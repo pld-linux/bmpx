@@ -1,0 +1,12 @@
+diff -urN bmpx-0.40.14/configure.ac bmpx-0.40.14.new/configure.ac
+--- bmpx-0.40.14/configure.ac	2008-07-26 00:26:53.000000000 +0200
++++ bmpx-0.40.14.new/configure.ac	2008-07-26 00:29:27.000000000 +0200
+@@ -398,7 +398,7 @@
+     AC_LANG_SAVE
+     AC_LANG_CPLUSPLUS
+ 
+-    AC_CHECK_LIB([sidplay], [C64_clockSpeed], [have_sid=yes], [have_sid=no])
++    AC_CHECK_MEMBER([struct sidTuneInfo.loadAddr], [have_sid=yes], [have_sid=no], [#include <sidplay/sidtune.h>])
+ 
+     if test "$have_sid" = "yes"; then
+         AC_DEFINE([HAVE_SID], [1], [have sid])
