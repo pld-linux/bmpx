@@ -6,7 +6,7 @@ Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl.UTF-8):	Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.40.14
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.backtrace.info/releases/0.40/%{name}-%{version}.tar.bz2
@@ -45,6 +45,7 @@ BuildRequires:	startup-notification-devel >= 0.8
 BuildRequires:	taglib-devel >= 1.4-2
 BuildRequires:	unzip
 BuildRequires:	xorg-lib-libSM-devel
+BuildRequires:	zip
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk+2 >= 2:2.10.0
 Requires(post,postun):	hicolor-icon-theme
@@ -72,8 +73,8 @@ Obsoletes:	bmpx-remote-gtk
 Obsoletes:	bmpx-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_firefoxdir	%{_datadir}/mozilla-firefox
-%define		_chromedir	%{_firefoxdir}/chrome
+%define		_iceweaseldir	%{_datadir}/iceweasel
+%define		_chromedir	%{_iceweaseldir}/chrome
 
 %description
 BMPx is the follow-up of the BMP project with a codebase rewritten
@@ -101,18 +102,21 @@ Header files required for compiling BMPx media player plugins.
 Pliki nagłówkowe potrzebne do kompilowania wtyczek odtwarzacza
 multimedialnego BMPx.
 
-%package -n mozilla-firefox-plugin-bmpx
-Summary:	BMPx plugin for Mozilla Firefox
-Summary(pl.UTF-8):	Wtyczka BMPx dla Mozilli Firefox
+%package -n iceweasel-extension-bmpx
+Summary:	Iceweasel extension - BMPx
+Summary(pl.UTF-8):	Rozszerzenie dla przeglądarki Iceweasel - BMPx
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
-Requires:	mozilla-firefox >= 2.0.0.1-2
+Requires:	iceweasel
+Provides:	mozilla-firefox-plugin-bmpx
+Obsoletes:	mozilla-firefox-plugin-bmpx
 
-%description -n mozilla-firefox-plugin-bmpx
-This plugin registers the lastfm:// protocol to BMPx.
+%description -n iceweasel-extension-bmpx
+Iceweasel extension which registers the lastfm:// protocol to BMPx.
 
-%description -n mozilla-firefox-plugin-bmpx -l pl.UTF-8
-Ta wtyczka rejestruje protokół lastfm:// do BMPx.
+%description -n iceweasel-extension-bmpx -l pl.UTF-8
+Rozszerzenie dla przeglądarki Iceweasel, które rejestruje protokół
+lastfm:// do BMPx.
 
 %prep
 %setup -q
@@ -140,11 +144,11 @@ install -d $RPM_BUILD_ROOT%{_chromedir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-unzip -q -o xpi/bmp.xpi -d $RPM_BUILD_ROOT%{_firefoxdir}
-sed -e 's@chrome/bmp\.jar@bmp\.jar@' $RPM_BUILD_ROOT%{_firefoxdir}/chrome.manifest \
+unzip -q -o xpi/bmp.xpi -d $RPM_BUILD_ROOT%{_iceweaseldir}
+sed -e 's@chrome/bmp\.jar@bmp\.jar@' $RPM_BUILD_ROOT%{_iceweaseldir}/chrome.manifest \
 	> $RPM_BUILD_ROOT%{_chromedir}/bmp.manifest
 
-rm -f $RPM_BUILD_ROOT%{_firefoxdir}/{install.rdf,chrome.manifest}
+rm -f $RPM_BUILD_ROOT%{_iceweaseldir}/{install.rdf,chrome.manifest}
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/bmpx/plugins/{taglib,vfs/container,vfs/transport}/*.la
 mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{th_TH,th}
@@ -167,6 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
+%attr(755,root,root) %{_bindir}/bmp2
 %attr(755,root,root) %{_bindir}/beep-media-player-2
 %attr(755,root,root) %{_bindir}/bmp-play-files-2.0
 %attr(755,root,root) %{_bindir}/bmp-play-uris-2.0
@@ -194,7 +199,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/bmp-2.0
 %{_pkgconfigdir}/*.pc
 
-%files -n mozilla-firefox-plugin-bmpx
+%files -n iceweasel-extension-bmpx
 %defattr(644,root,root,755)
 %{_chromedir}/bmp.jar
 %{_chromedir}/bmp.manifest
