@@ -23,7 +23,9 @@ BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairomm-devel >= 0.6.0
 BuildRequires:	cdparanoia-III-devel
 BuildRequires:	dbus-glib-devel >= 0.62
+BuildRequires:	docbook-style-xsl
 BuildRequires:	gcc-c++ >= 5:4.0.0
+BuildRequires:	gettext-devel
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.10
 BuildRequires:	gtkmm-devel >= 2.10.0
 BuildRequires:	hal-devel >= 0.5.7.1
