@@ -15,6 +15,7 @@ Patch0:		%{name}-lib64.patch
 Patch1:		%{name}-libsoup24.patch
 Patch2:		%{name}-sidplay.patch
 Patch3:		%{name}-c++.patch
+Patch4:		%{name}-am.patch
 URL:		http://bmpx.backtrace.info/
 BuildRequires:	alsa-lib-devel >= 1.0.9
 BuildRequires:	autoconf >= 2.60
@@ -127,6 +128,7 @@ lastfm:// do BMPx.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}

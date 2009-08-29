@@ -1,0 +1,22 @@
+fix:
+/usr/bin/install: will not overwrite just-created `/tmp/bmpx-0.40.14-.../usr/share/doc/bmpx/images/favicon.ico' with `favicon.ico'
+
+--- bmpx-0.40.14/docs/images/Makefile.am.orig	2009-08-29 10:46:32.000000000 +0200
++++ bmpx-0.40.14/docs/images/Makefile.am	2009-08-29 10:53:10.466659295 +0200
+@@ -1,4 +1,4 @@
+-image_DATA=main-window.png bmp.png active-source.png playing-source.png important.png tip.png favicon.ico bmp-logo-small.png gradient.png rect1869.png favicon.ico
++image_DATA=main-window.png bmp.png active-source.png playing-source.png important.png tip.png favicon.ico bmp-logo-small.png gradient.png rect1869.png
+ imagedir=$(prefix)/share/doc/@PACKAGE@/images
+ 
+ EXTRA_DIST=$(image_DATA)
+--- bmpx-0.40.14/docs/images/Makefile.in.orig	2009-08-29 10:52:07.000000000 +0200
++++ bmpx-0.40.14/docs/images/Makefile.in	2009-08-29 10:52:57.915461632 +0200
+@@ -313,7 +313,7 @@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-image_DATA = main-window.png bmp.png active-source.png playing-source.png important.png tip.png favicon.ico bmp-logo-small.png gradient.png rect1869.png favicon.ico
++image_DATA = main-window.png bmp.png active-source.png playing-source.png important.png tip.png favicon.ico bmp-logo-small.png gradient.png rect1869.png
+ imagedir = $(prefix)/share/doc/@PACKAGE@/images
+ EXTRA_DIST = $(image_DATA)
+ all: all-am
