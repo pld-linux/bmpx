@@ -13,8 +13,8 @@ Source0:	http://files.backtrace.info/releases/0.40/%{name}-%{version}.tar.bz2
 # Source0-md5:	c741e05a82a82b14b6775d44a7c93c15
 Patch0:		%{name}-lib64.patch
 Patch1:		%{name}-libsoup24.patch
-Patch2:		%{name}-invalid-conversion.patch
-Patch3:		%{name}-sidplay.patch
+Patch2:		%{name}-sidplay.patch
+Patch3:		%{name}-c++.patch
 URL:		http://bmpx.backtrace.info/
 BuildRequires:	alsa-lib-devel >= 1.0.9
 BuildRequires:	autoconf >= 2.60
