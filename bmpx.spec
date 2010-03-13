@@ -24,6 +24,7 @@ BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairomm-devel >= 0.6.0
 BuildRequires:	cdparanoia-III-devel
 BuildRequires:	dbus-glib-devel >= 0.62
+BuildRequires:	docbook-dtd45-xml
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gcc-c++ >= 5:4.0.0
 BuildRequires:	gettext-devel
