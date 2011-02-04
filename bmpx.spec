@@ -6,7 +6,7 @@ Summary:	Sound player with the WinAmp GUI, for Unix-based systems for GTK+
 Summary(pl.UTF-8):	Odtwarzacz dźwięku z interfejsem WinAmpa dla GTK+
 Name:		bmpx
 Version:	0.40.14
-Release:	14
+Release:	15
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	http://files.backtrace.info/releases/0.40/%{name}-%{version}.tar.bz2
@@ -26,7 +26,6 @@ BuildRequires:	cdparanoia-III-devel
 BuildRequires:	dbus-glib-devel >= 0.62
 BuildRequires:	docbook-dtd45-xml
 BuildRequires:	docbook-style-xsl
-BuildRequires:	gcc-c++ >= 5:4.0.0
 BuildRequires:	gettext-devel
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.10
 BuildRequires:	gtkmm-devel >= 2.10.0
@@ -40,6 +39,7 @@ BuildRequires:	libsexymm-devel >= 0.1.9
 %{?with_sid:BuildRequires:	libsidplay-devel}
 BuildRequires:	libsigc++-devel >= 2.0.0
 BuildRequires:	libsoup-devel >= 2.4.0
+BuildRequires:	libstdc++-devel >= 5:4.0.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	libxslt-progs
@@ -52,7 +52,7 @@ BuildRequires:	unzip
 BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	zip
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	gtk+2 >= 2:2.10.0
+Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	gstreamer-audio-effects-base
 Requires:	gstreamer-audiosink
