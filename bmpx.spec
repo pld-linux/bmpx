@@ -26,7 +26,7 @@ BuildRequires:	cdparanoia-III-devel
 BuildRequires:	dbus-glib-devel >= 0.62
 BuildRequires:	docbook-dtd45-xml
 BuildRequires:	docbook-style-xsl
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.10
 BuildRequires:	gtkmm-devel >= 2.10.0
 BuildRequires:	hal-devel >= 0.5.7.1
